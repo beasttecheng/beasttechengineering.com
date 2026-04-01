@@ -510,7 +510,7 @@ nav .container {
 
 .divisions-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 16px;
 }
 
@@ -582,6 +582,90 @@ nav .container {
 .division-body ul li::before {
   content: '> ';
   color: var(--paper-green);
+}
+
+/* Coming Soon badge */
+.coming-soon-badge {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #fff;
+  background: var(--paper-green);
+  padding: 3px 10px;
+  margin-bottom: 12px;
+}
+
+/* Interest form inside a paper sheet */
+.interest-form {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(74,132,74,0.18);
+}
+
+.interest-form .if-label {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(45,122,45,0.5);
+  margin-bottom: 8px;
+  display: block;
+}
+
+.interest-form .if-row {
+  display: flex;
+  gap: 6px;
+}
+
+.interest-form input {
+  flex: 1;
+  background: rgba(255,255,255,0.45);
+  border: 1px solid rgba(74,132,74,0.22);
+  color: var(--paper-ink);
+  font-family: var(--mono);
+  font-size: 12px;
+  padding: 10px 12px;
+  outline: none;
+}
+
+.interest-form input:focus {
+  border-color: var(--paper-green);
+}
+
+.interest-form input::placeholder {
+  color: rgba(74,132,74,0.3);
+}
+
+.interest-form button {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #fff;
+  background: var(--paper-green);
+  border: none;
+  padding: 10px 16px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.2s;
+}
+
+.interest-form button:hover {
+  background: #1a5c1a;
+}
+
+.interest-form .if-success {
+  display: none;
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--paper-green);
+  padding: 10px 0;
+}
+
+.interest-form .if-success.visible {
+  display: block;
 }
 
 /* === PROBLEM / WHY === */
@@ -993,7 +1077,6 @@ footer {
 /* === RESPONSIVE === */
 @media (max-width: 900px) {
   .divisions-grid, .problem-blocks { grid-template-columns: 1fr; }
-  .divisions-grid { gap: 24px; }
   .engage-layout { grid-template-columns: 1fr; gap: 40px; }
   .form-grid { grid-template-columns: 1fr; }
   .founder-bar { grid-template-columns: 1fr; text-align: left; }
@@ -1062,7 +1145,7 @@ footer {
   <div class="container">
     <div class="section-label">
       <span>§01 — Divisions</span>
-      <span class="label-right">Three capabilities. One firm.</span>
+      <span class="label-right">Four divisions. One firm.</span>
     </div>
     <p class="divisions-intro">BeastTech operates three specialized divisions under one engineering practice. Each draws on the same technical depth — applied differently depending on what the engagement requires.</p>
     <div class="divisions-grid reveal-stagger">
@@ -1072,7 +1155,7 @@ footer {
         <div class="title-block">
           <div class="tb-cell">Title<span class="tb-title">AI &amp; Automation</span></div>
           <div class="tb-cell">Dwg No.<span class="tb-value">DIV-01</span></div>
-          <div class="tb-cell">Sheet<span class="tb-value">1 of 3</span></div>
+          <div class="tb-cell">Sheet<span class="tb-value">1 of 4</span></div>
         </div>
         <div class="title-block-row2">
           <div class="tb-cell">Drawn<span class="tb-value">B. East</span></div>
@@ -1097,7 +1180,7 @@ footer {
         <div class="title-block">
           <div class="tb-cell">Title<span class="tb-title">Engineering &amp; Global Sourcing</span></div>
           <div class="tb-cell">Dwg No.<span class="tb-value">DIV-02</span></div>
-          <div class="tb-cell">Sheet<span class="tb-value">2 of 3</span></div>
+          <div class="tb-cell">Sheet<span class="tb-value">2 of 4</span></div>
         </div>
         <div class="title-block-row2">
           <div class="tb-cell">Drawn<span class="tb-value">B. East</span></div>
@@ -1122,7 +1205,7 @@ footer {
         <div class="title-block">
           <div class="tb-cell">Title<span class="tb-title">Growth Partnerships</span></div>
           <div class="tb-cell">Dwg No.<span class="tb-value">DIV-03</span></div>
-          <div class="tb-cell">Sheet<span class="tb-value">3 of 3</span></div>
+          <div class="tb-cell">Sheet<span class="tb-value">3 of 4</span></div>
         </div>
         <div class="title-block-row2">
           <div class="tb-cell">Drawn<span class="tb-value">B. East</span></div>
@@ -1139,6 +1222,41 @@ footer {
             <li>Embedded operational leadership</li>
             <li>Also available as purchased services</li>
           </ul>
+        </div>
+      </div>
+
+      <!-- DIV-04 — Professional Development (Coming Soon) -->
+      <div class="paper-sheet">
+        <div class="title-block">
+          <div class="tb-cell">Title<span class="tb-title">Professional Development</span></div>
+          <div class="tb-cell">Dwg No.<span class="tb-value">DIV-04</span></div>
+          <div class="tb-cell">Sheet<span class="tb-value">4 of 4</span></div>
+        </div>
+        <div class="title-block-row2">
+          <div class="tb-cell">Drawn<span class="tb-value">B. East, P.E.</span></div>
+          <div class="tb-cell">Date<span class="tb-value">2026-04</span></div>
+          <div class="tb-cell">Scale<span class="tb-value">NTS</span></div>
+          <div class="tb-cell">Rev<span class="tb-value">PRE-A</span></div>
+        </div>
+        <div class="division-body">
+          <div class="coming-soon-badge">Coming Soon</div>
+          <h3>AI-Native Continuing Education for Licensed Professionals</h3>
+          <p>PDH, CPE, CLE, and CME credits built by a practicing P.E. who uses multi-agent AI workflows daily — not a content marketer who read a blog post. Courses designed for engineers, CPAs, attorneys, and physicians who need to understand AI well enough to put their license behind it.</p>
+          <ul>
+            <li>State board-approved PDH/CE credits</li>
+            <li>AI fundamentals, ethics &amp; liability</li>
+            <li>Multi-agent workflows for licensed practice</li>
+            <li>Live cohort workshops (limited seats)</li>
+            <li>Enterprise firm licensing available</li>
+          </ul>
+          <div class="interest-form" id="pdhInterestForm">
+            <span class="if-label">Get notified when courses launch</span>
+            <div class="if-row">
+              <input type="email" id="pdhEmail" placeholder="you@company.com" />
+              <button onclick="submitPdhInterest()">Notify Me</button>
+            </div>
+            <div class="if-success" id="pdhSuccess">Added — we'll be in touch.</div>
+          </div>
         </div>
       </div>
 
@@ -1223,8 +1341,8 @@ footer {
     <div class="founder-bar reveal">
       <p><strong>BeastTech Engineering</strong> was founded by a mechanical engineer with a decade in industrial manufacturing who used AI to build production systems that replaced entire software platforms — with zero coding background. That capability is now a firm.</p>
       <div>
-        <div class="founder-name">Ben East</div>
-        <div class="founder-title">Founder &amp; Principal Engineer</div>
+        <div class="founder-name">Ben East, P.E.</div>
+        <div class="founder-title">Founder &amp; Principal Engineer, P.E.</div>
       </div>
     </div>
   </div>
@@ -1401,6 +1519,20 @@ const observer = new IntersectionObserver((entries) => {
 
 document.querySelectorAll('.reveal, .reveal-stagger').forEach(el => observer.observe(el));
 
+// PDH Interest Form
+function submitPdhInterest() {
+  const email = document.getElementById('pdhEmail').value;
+  if (!email || !email.includes('@')) return;
+  const store = JSON.parse(localStorage.getItem('beasttech_pdh_interest') || '[]');
+  store.push({ email: email, submitted_at: new Date().toISOString() });
+  localStorage.setItem('beasttech_pdh_interest', JSON.stringify(store));
+  document.querySelector('#pdhInterestForm .if-row').style.display = 'none';
+  document.getElementById('pdhSuccess').classList.add('visible');
+  // Also send to email endpoint
+  sendToEmail('pdh_interest', { email: email });
+}
+
+// Assessment Form
 document.getElementById('assessmentForm').addEventListener('submit', function(e) {
   e.preventDefault();
   const fd = new FormData(this);
@@ -1412,7 +1544,25 @@ document.getElementById('assessmentForm').addEventListener('submit', function(e)
   localStorage.setItem('beasttech_assessments', JSON.stringify(store));
   document.getElementById('formBody').style.display = 'none';
   document.getElementById('formSuccess').classList.add('visible');
+  // Also send to email endpoint
+  sendToEmail('assessment', data);
 });
+
+// Send form data to email (via Cloudflare Worker — to be deployed)
+// For now, falls back to mailto with pre-filled data
+function sendToEmail(type, data) {
+  const WORKER_URL = null; // Replace with Cloudflare Worker URL when deployed
+  if (WORKER_URL) {
+    fetch(WORKER_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ type: type, data: data })
+    }).catch(() => {});
+  } else {
+    // Fallback: store locally and log
+    console.log('[BeastTech] Form submission (' + type + '):', JSON.stringify(data));
+  }
+}
 
 let lastY = 0;
 window.addEventListener('scroll', () => {
