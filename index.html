@@ -1,0 +1,1430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BeastTech Engineering — Engineering Firm. AI-Native.</title>
+<meta name="description" content="A registered engineering firm building AI systems, sourcing industrial technology globally, and partnering with companies through equity-aligned growth engagements.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --black: #000000;
+  --surface: #060608;
+  --surface-2: #0a0a0e;
+  --rule: #111118;
+  --rule-bright: #1a1a24;
+  --steel: #252530;
+  --muted: #4a4a5a;
+  --text-dim: #7a7a90;
+  --text: #c8c8d8;
+  --text-bright: #e8e8f0;
+  --phosphor: #00FF41;
+  --phosphor-dim: #00cc34;
+  --phosphor-glow: rgba(0, 255, 65, 0.08);
+  --phosphor-glow-strong: rgba(0, 255, 65, 0.15);
+  --cyan: #00FFFF;
+  --cyan-dim: #00cccc;
+  --cyan-glow: rgba(0, 255, 255, 0.06);
+  /* Engineering paper palette */
+  --paper: #D6E4CC;
+  --paper-grid-minor: rgba(74, 132, 74, 0.16);
+  --paper-grid-major: rgba(74, 132, 74, 0.38);
+  --paper-ink: #1a1a1a;
+  --paper-green: #2d7a2d;
+  --display: 'Orbitron', sans-serif;
+  --mono: 'Share Tech Mono', 'Courier New', monospace;
+  --body: 'Rajdhani', sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+  background: var(--black);
+  color: var(--text);
+  font-family: var(--body);
+  font-size: 16px;
+  line-height: 1.7;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  background: var(--black);
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* === CRT VIGNETTE (subtle, no scanlines on body text) === */
+body::after {
+  content: '';
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: radial-gradient(ellipse at center, transparent 55%, rgba(0,0,0,0.5) 100%);
+  pointer-events: none;
+  z-index: 9999;
+}
+
+::selection {
+  background: var(--phosphor);
+  color: var(--black);
+}
+
+a { color: var(--phosphor); text-decoration: none; }
+a:hover { text-decoration: underline; text-shadow: 0 0 8px var(--phosphor-glow-strong); }
+
+/* === SUBTLE GRID BACKGROUND === */
+.grid-bg {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-image:
+    linear-gradient(rgba(0, 255, 65, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 255, 65, 0.025) 1px, transparent 1px);
+  background-size: 48px 48px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* === ENGINEERING PAPER SHEET — Individual Cards === */
+.paper-sheet {
+  position: relative;
+  background-color: var(--paper);
+  /* Paper texture noise */
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+  overflow: hidden;
+}
+
+/*
+  Engineering paper border system:
+  - Outer thick border (the paper edge)
+  - Margin area (gap between outer edge and inner ruled border)
+  - Inner ruled border (the green line you write inside of)
+  - Title block sits INSIDE the inner border, at top
+  - Grid fills only the body area inside the inner border, below title block
+*/
+
+/* Outer thick border */
+.paper-sheet {
+  border: none;
+  /*
+    Real engineering paper border ratio:
+    - Thick outer green border (the paper edge)
+    - Generous blank margin (~18px)
+    - Thinner inner ruled green border (the writing boundary)
+  */
+  box-shadow:
+    /* Outermost edge — thick green border */
+    0 0 0 2.5px rgba(74, 132, 74, 0.5),
+    /* Margin gap — blank paper between borders */
+    0 0 0 18px var(--paper),
+    /* Inner ruled border — thinner */
+    0 0 0 19px rgba(74, 132, 74, 0.3);
+  margin: 19px; /* compensate for box-shadow overflow */
+}
+
+/* No grid on the paper-sheet itself — grid lives inside .division-body */
+.paper-sheet::before { display: none; }
+.paper-sheet::after { display: none; }
+
+.paper-sheet > * { position: relative; z-index: 2; }
+
+/* === TITLE BLOCK (top of each sheet, inside inner border) === */
+.title-block {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  border-bottom: 2px solid rgba(74, 132, 74, 0.35);
+  background: rgba(200, 216, 190, 0.25);
+}
+
+.title-block .tb-cell {
+  padding: 10px 14px;
+  border-right: 1.5px solid rgba(74, 132, 74, 0.2);
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(45, 122, 45, 0.5);
+  line-height: 1.4;
+}
+
+.title-block .tb-cell:last-child { border-right: none; }
+
+.title-block .tb-title {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: var(--paper-green);
+  display: block;
+  margin-top: 2px;
+}
+
+.title-block .tb-value {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--paper-ink);
+  display: block;
+  margin-top: 1px;
+  letter-spacing: 0.08em;
+}
+
+/* Secondary row in title block */
+.title-block-row2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  border-bottom: 1.5px solid rgba(74, 132, 74, 0.2);
+  background: rgba(200, 216, 190, 0.12);
+}
+
+.title-block-row2 .tb-cell {
+  padding: 5px 14px;
+  border-right: 1px solid rgba(74, 132, 74, 0.12);
+  font-family: var(--mono);
+  font-size: 8px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(45, 122, 45, 0.38);
+}
+
+.title-block-row2 .tb-cell:last-child { border-right: none; }
+
+.title-block-row2 .tb-value {
+  color: rgba(26, 26, 26, 0.5);
+  font-size: 9px;
+  display: block;
+  margin-top: 1px;
+}
+
+/* === LAYOUT === */
+.container {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 0 clamp(20px, 5vw, 72px);
+  position: relative;
+  z-index: 1;
+}
+
+section {
+  padding: 120px 0;
+  position: relative;
+}
+
+.section-label {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--phosphor);
+  margin-bottom: 48px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--rule-bright);
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  text-shadow: 0 0 8px rgba(0, 255, 65, 0.3);
+}
+
+.section-label .label-right {
+  color: var(--muted);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-shadow: none;
+}
+
+/* === NAV === */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  padding: 14px 0;
+  background: rgba(0, 0, 0, 0.9);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--rule);
+  transition: transform 0.3s ease;
+}
+
+nav .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* === LOGO J — NAV VERSION === */
+.logo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  line-height: 1;
+  gap: 0;
+}
+
+.logo .logo-row {
+  display: flex;
+  align-items: baseline;
+  gap: 0;
+}
+
+.logo .logo-beast {
+  font-family: var(--display);
+  font-weight: 900;
+  font-size: 16px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.logo .logo-tech {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: transparent;
+  -webkit-text-stroke: 0.8px var(--phosphor);
+  filter: drop-shadow(0 0 3px rgba(0,255,65,0.35));
+}
+
+.logo .logo-line {
+  display: block;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--phosphor), transparent);
+  box-shadow: 0 0 4px rgba(0,255,65,0.25);
+  margin: 2px 0 3px;
+}
+
+.logo .logo-eng {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 7px;
+  letter-spacing: 0.38em;
+  text-transform: uppercase;
+  color: #fff;
+  padding-left: 0.38em;
+  display: block;
+  width: 100%;
+  text-align: center;
+}
+
+.nav-links {
+  display: flex;
+  gap: 28px;
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  transition: all 0.2s;
+}
+
+.nav-links a:hover {
+  color: var(--phosphor);
+  text-shadow: 0 0 8px rgba(0, 255, 65, 0.3);
+  text-decoration: none;
+}
+
+.nav-mobile-toggle {
+  display: none;
+  background: none;
+  border: 1px solid var(--steel);
+  color: var(--phosphor);
+  padding: 6px 14px;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  cursor: pointer;
+  text-transform: uppercase;
+}
+
+/* === HERO === */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: 80px;
+}
+
+.hero-terminal {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--muted);
+  margin-bottom: 40px;
+  letter-spacing: 0.05em;
+}
+
+.hero-terminal .cursor {
+  display: inline-block;
+  width: 8px;
+  height: 14px;
+  background: var(--phosphor);
+  margin-left: 4px;
+  animation: blink 1s step-end infinite;
+  vertical-align: text-bottom;
+}
+
+@keyframes blink { 50% { opacity: 0; } }
+
+/* === HERO LOGO (large) === */
+.hero-logo {
+  margin-bottom: 40px;
+  line-height: 1;
+}
+
+.hero-logo .hl-beast {
+  font-family: var(--display);
+  font-weight: 900;
+  font-size: clamp(48px, 8vw, 90px);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #fff;
+  display: block;
+  text-shadow: 0 0 3px rgba(255,255,255,0.3);
+}
+
+.hero-logo .hl-tech {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: clamp(48px, 8vw, 90px);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--phosphor);
+  display: block;
+  margin-top: -4px;
+  filter: drop-shadow(0 0 5px rgba(0,255,65,0.4)) drop-shadow(0 0 20px rgba(0,255,65,0.12));
+}
+
+.hero-logo .hl-line {
+  display: block;
+  width: clamp(260px, 50vw, 520px);
+  height: 1px;
+  background: linear-gradient(90deg, var(--phosphor), rgba(0,255,65,0.2));
+  box-shadow: 0 0 8px rgba(0,255,65,0.3);
+  margin: 8px 0 10px;
+}
+
+.hero-logo .hl-eng {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: clamp(14px, 2.2vw, 22px);
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: #fff;
+  display: block;
+}
+
+.hero-sub {
+  font-family: var(--body);
+  font-size: 19px;
+  font-weight: 300;
+  color: var(--text-dim);
+  max-width: 600px;
+  line-height: 1.7;
+  margin-bottom: 20px;
+}
+
+.hero-credential {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--cyan);
+  margin-bottom: 40px;
+  text-shadow: 0 0 6px rgba(0, 255, 255, 0.3);
+}
+
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--black);
+  background: var(--phosphor);
+  padding: 14px 32px;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  box-shadow: 0 0 20px rgba(0, 255, 65, 0.2), inset 0 0 20px rgba(255, 255, 255, 0.1);
+  transition: all 0.3s;
+}
+
+.hero-cta:hover {
+  background: var(--cyan);
+  box-shadow: 0 0 30px rgba(0, 255, 255, 0.3), inset 0 0 20px rgba(255, 255, 255, 0.1);
+  text-decoration: none;
+  transform: translateY(-1px);
+}
+
+.hero-cta::after { content: '→'; }
+
+.hero-scroll {
+  position: absolute;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  color: var(--muted);
+  text-transform: uppercase;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  animation: float 2.5s ease-in-out infinite;
+}
+
+.hero-scroll::after {
+  content: '';
+  width: 1px;
+  height: 28px;
+  background: linear-gradient(to bottom, var(--phosphor-dim), transparent);
+}
+
+@keyframes float {
+  0%, 100% { opacity: 0.4; transform: translateX(-50%) translateY(0); }
+  50% { opacity: 0.8; transform: translateX(-50%) translateY(5px); }
+}
+
+/* === DIVISIONS === */
+.divisions-intro {
+  font-family: var(--body);
+  font-size: 18px;
+  font-weight: 300;
+  max-width: 640px;
+  line-height: 1.8;
+  margin-bottom: 48px;
+  color: var(--text-dim);
+}
+
+.divisions-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+/* Each division = individual engineering paper sheet */
+.division-body {
+  padding: 28px 24px 32px;
+  position: relative;
+}
+
+/* 5x5 grid — only in the body area, below title block */
+.division-body::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-image:
+    /* Major grid (every 5 squares = 100px) — thicker lines */
+    linear-gradient(to bottom, var(--paper-grid-major) 0px, var(--paper-grid-major) 1.5px, transparent 1.5px),
+    linear-gradient(to right, var(--paper-grid-major) 0px, var(--paper-grid-major) 1.5px, transparent 1.5px),
+    /* Minor grid (every 20px) — thin, showing through from backside */
+    linear-gradient(to bottom, var(--paper-grid-minor) 0px, var(--paper-grid-minor) 0.5px, transparent 0.5px),
+    linear-gradient(to right, var(--paper-grid-minor) 0px, var(--paper-grid-minor) 0.5px, transparent 0.5px);
+  background-size:
+    100% 100px,
+    100px 100%,
+    100% 20px,
+    20px 100%;
+  pointer-events: none;
+  z-index: 0;
+  filter: blur(0.15px);
+}
+
+.division-body > * { position: relative; z-index: 1; }
+
+.division-body h3 {
+  font-family: var(--display);
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--paper-ink);
+  margin-bottom: 14px;
+  line-height: 1.35;
+}
+
+.division-body p {
+  font-family: var(--body);
+  font-size: 14.5px;
+  font-weight: 400;
+  color: rgba(26,26,26,0.6);
+  line-height: 1.7;
+  margin-bottom: 18px;
+}
+
+.division-body ul {
+  list-style: none;
+  padding: 0;
+  border-top: 1px solid rgba(74,132,74,0.18);
+  padding-top: 14px;
+}
+
+.division-body ul li {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: rgba(26,26,26,0.5);
+  padding: 3px 0;
+  letter-spacing: 0.03em;
+}
+
+.division-body ul li::before {
+  content: '> ';
+  color: var(--paper-green);
+}
+
+/* === PROBLEM / WHY === */
+.problem-blocks {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 40px;
+  margin-top: 48px;
+}
+
+.problem-block {
+  position: relative;
+  padding-left: 20px;
+  border-left: 2px solid var(--rule-bright);
+}
+
+.problem-block:hover { border-left-color: var(--phosphor); }
+
+.problem-block .p-num {
+  font-family: var(--display);
+  font-size: 36px;
+  font-weight: 800;
+  color: var(--rule-bright);
+  line-height: 1;
+  margin-bottom: 16px;
+}
+
+.problem-block h3 {
+  font-family: var(--display);
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-bright);
+  margin-bottom: 12px;
+}
+
+.problem-block p {
+  font-family: var(--body);
+  font-size: 15px;
+  font-weight: 300;
+  color: var(--text-dim);
+  line-height: 1.7;
+}
+
+.problem-block .tag {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--cyan);
+  margin-top: 16px;
+  padding: 4px 10px;
+  border: 1px solid rgba(0, 255, 255, 0.2);
+  text-shadow: 0 0 6px rgba(0, 255, 255, 0.2);
+}
+
+/* === HOW WE ENGAGE === */
+.engage-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  margin-top: 48px;
+  align-items: start;
+}
+
+.engage-text h3 {
+  font-family: var(--display);
+  font-size: 22px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-bright);
+  margin-bottom: 20px;
+  line-height: 1.3;
+}
+
+.engage-text p {
+  font-family: var(--body);
+  font-size: 16px;
+  font-weight: 300;
+  color: var(--text-dim);
+  line-height: 1.8;
+  margin-bottom: 16px;
+}
+
+.engage-models {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  background: var(--rule-bright);
+}
+
+.engage-model {
+  background: var(--surface);
+  padding: 28px;
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 20px;
+  align-items: start;
+  transition: background 0.3s;
+}
+
+.engage-model:hover { background: var(--surface-2); }
+
+.engage-model .model-tag {
+  font-family: var(--display);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--phosphor);
+  padding-top: 3px;
+  text-shadow: 0 0 6px rgba(0, 255, 65, 0.3);
+}
+
+.engage-model h4 {
+  font-family: var(--body);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-bright);
+  margin-bottom: 6px;
+}
+
+.engage-model p {
+  font-family: var(--body);
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--text-dim);
+  line-height: 1.6;
+}
+
+/* === FOUNDER === */
+.founder-bar {
+  margin-top: 48px;
+  padding: 36px 40px;
+  border: 1px solid var(--rule-bright);
+  background: var(--surface);
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 40px;
+  align-items: center;
+}
+
+.founder-bar p {
+  font-family: var(--body);
+  font-size: 16px;
+  font-weight: 300;
+  color: var(--text-dim);
+  line-height: 1.7;
+}
+
+.founder-bar strong { color: var(--text-bright); font-weight: 600; }
+
+.founder-bar .founder-name {
+  font-family: var(--display);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--phosphor);
+  text-shadow: 0 0 6px rgba(0, 255, 65, 0.3);
+  white-space: nowrap;
+}
+
+.founder-bar .founder-title {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--muted);
+  letter-spacing: 0.1em;
+  margin-top: 4px;
+}
+
+/* === ASSESSMENT FORM — on engineering paper sheet === */
+.paper-sheet-wide {
+  margin-top: 48px;
+}
+
+.form-paper-body {
+  padding: 36px 32px;
+}
+
+.form-intro {
+  font-family: var(--body);
+  font-size: 16px;
+  font-weight: 400;
+  color: rgba(26,26,26,0.6);
+  max-width: 620px;
+  margin-bottom: 36px;
+  line-height: 1.7;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+}
+
+.form-group { display: flex; flex-direction: column; gap: 6px; }
+.form-group.full-width { grid-column: 1 / -1; }
+
+.form-group label {
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(45, 122, 45, 0.55);
+}
+
+.form-group label .req { color: var(--paper-green); }
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  background: rgba(255,255,255,0.45);
+  border: 1px solid rgba(74, 132, 74, 0.22);
+  color: var(--paper-ink);
+  font-family: var(--mono);
+  font-size: 13px;
+  padding: 12px 14px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  outline: none;
+  width: 100%;
+  appearance: none;
+}
+
+.form-group select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%232d7a2d' fill='none' stroke-width='1.5' opacity='0.4'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  background-color: rgba(255,255,255,0.45);
+  padding-right: 36px;
+  cursor: pointer;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: var(--paper-green);
+  box-shadow: 0 0 6px rgba(45,122,45,0.15);
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder { color: rgba(74,132,74,0.3); }
+
+.form-group textarea { min-height: 90px; resize: vertical; }
+
+.radio-row { display: flex; gap: 0; margin-top: 2px; }
+.radio-opt { flex: 1; position: relative; }
+.radio-opt input { position: absolute; opacity: 0; pointer-events: none; }
+
+.radio-opt label.radio-label {
+  display: block;
+  padding: 12px 14px;
+  background: rgba(255,255,255,0.35);
+  border: 1px solid rgba(74,132,74,0.2);
+  text-align: center;
+  cursor: pointer;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: rgba(26,26,26,0.45);
+  text-transform: uppercase;
+  transition: all 0.2s;
+}
+
+.radio-opt:not(:first-child) label.radio-label { border-left: none; }
+
+.radio-opt input:checked + label.radio-label {
+  background: rgba(45,122,45,0.1);
+  border-color: var(--paper-green);
+  color: var(--paper-green);
+}
+
+.radio-opt label.radio-label:hover { color: var(--paper-ink); }
+
+.form-divider {
+  grid-column: 1 / -1;
+  height: 1px;
+  background: rgba(74,132,74,0.15);
+  margin: 4px 0;
+}
+
+.form-submit-row {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 12px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.form-privacy {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: rgba(45,122,45,0.4);
+  letter-spacing: 0.05em;
+}
+
+.form-submit {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #fff;
+  background: var(--paper-green);
+  border: none;
+  padding: 14px 36px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.form-submit:hover {
+  background: #1a5c1a;
+  transform: translateY(-1px);
+}
+
+.assessment-success { display: none; padding: 72px 36px; text-align: center; }
+.assessment-success.visible { display: block; }
+
+.assessment-success .check-icon {
+  font-family: var(--display);
+  font-size: 36px;
+  color: var(--paper-green);
+  margin-bottom: 20px;
+}
+
+.assessment-success h3 {
+  font-family: var(--display);
+  font-size: 18px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--paper-ink);
+  margin-bottom: 12px;
+}
+
+.assessment-success p {
+  font-family: var(--body);
+  font-size: 15px;
+  font-weight: 400;
+  color: rgba(26,26,26,0.6);
+  max-width: 420px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+/* === FOOTER === */
+footer {
+  padding: 48px 0;
+  border-top: 1px solid var(--rule);
+}
+
+.footer-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.footer-left {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--muted);
+  letter-spacing: 0.06em;
+}
+
+.footer-links { display: flex; gap: 28px; }
+
+.footer-links a {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--text-dim);
+  transition: all 0.2s;
+}
+
+.footer-links a:hover {
+  color: var(--phosphor);
+  text-shadow: 0 0 8px rgba(0, 255, 65, 0.3);
+  text-decoration: none;
+}
+
+/* === SCROLL REVEAL === */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+.reveal-stagger > * {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.reveal-stagger.visible > *:nth-child(1) { transition-delay: 0s; opacity: 1; transform: translateY(0); }
+.reveal-stagger.visible > *:nth-child(2) { transition-delay: 0.08s; opacity: 1; transform: translateY(0); }
+.reveal-stagger.visible > *:nth-child(3) { transition-delay: 0.16s; opacity: 1; transform: translateY(0); }
+.reveal-stagger.visible > *:nth-child(4) { transition-delay: 0.24s; opacity: 1; transform: translateY(0); }
+
+/* === RESPONSIVE === */
+@media (max-width: 900px) {
+  .divisions-grid, .problem-blocks { grid-template-columns: 1fr; }
+  .divisions-grid { gap: 24px; }
+  .engage-layout { grid-template-columns: 1fr; gap: 40px; }
+  .form-grid { grid-template-columns: 1fr; }
+  .founder-bar { grid-template-columns: 1fr; text-align: left; }
+  .nav-links { display: none; }
+  .nav-links.open {
+    display: flex; flex-direction: column;
+    position: absolute; top: 100%; left: 0; right: 0;
+    background: rgba(0,0,0,0.95); backdrop-filter: blur(16px);
+    padding: 20px clamp(20px,5vw,72px); border-bottom: 1px solid var(--rule); gap: 16px;
+  }
+  .nav-mobile-toggle { display: block; }
+  .radio-row { flex-direction: column; }
+  .radio-opt:not(:first-child) label.radio-label { border-left: 1px solid rgba(74,132,74,0.2); border-top: none; }
+}
+
+@media (max-width: 600px) {
+  section { padding: 80px 0; }
+  .division-body { padding: 20px 18px 24px; }
+  .form-paper-body { padding: 24px 20px; }
+  .founder-bar { padding: 28px 24px; }
+  .footer-inner { flex-direction: column; align-items: flex-start; }
+}
+</style>
+</head>
+<body>
+
+<div class="grid-bg"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="container">
+    <div class="logo">
+      <div class="logo-row"><span class="logo-beast">BEAST</span><span class="logo-tech">TECH</span></div>
+      <span class="logo-line"></span>
+      <span class="logo-eng">ENGINEERING</span>
+    </div>
+    <button class="nav-mobile-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Toggle menu">MENU</button>
+    <ul class="nav-links">
+      <li><a href="#divisions">Divisions</a></li>
+      <li><a href="#problem">Why</a></li>
+      <li><a href="#engage">Engage</a></li>
+      <li><a href="#assessment">Assessment</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="container">
+    <div class="hero-terminal">root@beasttech:~$ ./init_engagement --mode=strategic<span class="cursor"></span></div>
+    <div class="hero-logo">
+      <span class="hl-beast">BEAST</span>
+      <span class="hl-tech">TECH</span>
+      <span class="hl-line"></span>
+      <span class="hl-eng">ENGINEERING</span>
+    </div>
+    <p class="hero-sub">A registered engineering firm that builds AI-driven operational systems, sources industrial technology across borders, and partners with growth-stage companies as embedded technical leadership.</p>
+    <div class="hero-credential">Registered Engineering Firm — Texas Board of Professional Engineers</div>
+    <a href="#assessment" class="hero-cta">Request capability assessment</a>
+    <div class="hero-scroll">Scroll</div>
+  </div>
+</section>
+
+<!-- DIVISIONS -->
+<section id="divisions">
+  <div class="container">
+    <div class="section-label">
+      <span>§01 — Divisions</span>
+      <span class="label-right">Three capabilities. One firm.</span>
+    </div>
+    <p class="divisions-intro">BeastTech operates three specialized divisions under one engineering practice. Each draws on the same technical depth — applied differently depending on what the engagement requires.</p>
+    <div class="divisions-grid reveal-stagger">
+
+      <!-- DIV-01 — AI & Automation -->
+      <div class="paper-sheet">
+        <div class="title-block">
+          <div class="tb-cell">Title<span class="tb-title">AI &amp; Automation</span></div>
+          <div class="tb-cell">Dwg No.<span class="tb-value">DIV-01</span></div>
+          <div class="tb-cell">Sheet<span class="tb-value">1 of 3</span></div>
+        </div>
+        <div class="title-block-row2">
+          <div class="tb-cell">Drawn<span class="tb-value">B. East</span></div>
+          <div class="tb-cell">Date<span class="tb-value">2026-04</span></div>
+          <div class="tb-cell">Scale<span class="tb-value">NTS</span></div>
+          <div class="tb-cell">Rev<span class="tb-value">A</span></div>
+        </div>
+        <div class="division-body">
+          <h3>Intelligent Systems That Replace Coordination Overhead</h3>
+          <p>We design and deploy multi-agent architectures, automation pipelines, and intelligence layers that eliminate the management tax between decisions and execution. Not chatbots — production systems that run operations.</p>
+          <ul>
+            <li>Multi-agent orchestration systems</li>
+            <li>Automated decision routing &amp; workflows</li>
+            <li>Custom internal platforms — zero SaaS dependency</li>
+            <li>Operational intelligence replacing headcount</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- DIV-02 — Engineering & Global Sourcing -->
+      <div class="paper-sheet">
+        <div class="title-block">
+          <div class="tb-cell">Title<span class="tb-title">Engineering &amp; Global Sourcing</span></div>
+          <div class="tb-cell">Dwg No.<span class="tb-value">DIV-02</span></div>
+          <div class="tb-cell">Sheet<span class="tb-value">2 of 3</span></div>
+        </div>
+        <div class="title-block-row2">
+          <div class="tb-cell">Drawn<span class="tb-value">B. East</span></div>
+          <div class="tb-cell">Date<span class="tb-value">2026-04</span></div>
+          <div class="tb-cell">Scale<span class="tb-value">NTS</span></div>
+          <div class="tb-cell">Rev<span class="tb-value">A</span></div>
+        </div>
+        <div class="division-body">
+          <h3>Industrial Technology Without Borders</h3>
+          <p>Proven industrial systems trapped in one geography while other markets overpay for inferior alternatives. We identify, source, and distribute specialty engineering technologies — US to EU, Australia, APAC, and beyond.</p>
+          <ul>
+            <li>Cross-border technology distribution</li>
+            <li>OEM partnership structuring</li>
+            <li>Technical evaluation &amp; qualification</li>
+            <li>Local support network deployment</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- DIV-03 — Growth Partnerships -->
+      <div class="paper-sheet">
+        <div class="title-block">
+          <div class="tb-cell">Title<span class="tb-title">Growth Partnerships</span></div>
+          <div class="tb-cell">Dwg No.<span class="tb-value">DIV-03</span></div>
+          <div class="tb-cell">Sheet<span class="tb-value">3 of 3</span></div>
+        </div>
+        <div class="title-block-row2">
+          <div class="tb-cell">Drawn<span class="tb-value">B. East</span></div>
+          <div class="tb-cell">Date<span class="tb-value">2026-04</span></div>
+          <div class="tb-cell">Scale<span class="tb-value">NTS</span></div>
+          <div class="tb-cell">Rev<span class="tb-value">A</span></div>
+        </div>
+        <div class="division-body">
+          <h3>Embedded Technical Leadership, Aligned on Growth</h3>
+          <p>We place expert engineering leadership inside companies — not as consultants billing hours, but as partners with equity positions tranched on growth milestones. When the company wins, we win. That's the alignment that produces real results.</p>
+          <ul>
+            <li>Equity-structured growth engagements</li>
+            <li>Milestone-based compensation alignment</li>
+            <li>Embedded operational leadership</li>
+            <li>Also available as purchased services</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- THE PROBLEM — DARK -->
+<section id="problem">
+  <div class="container">
+    <div class="section-label">
+      <span>§02 — Why This Exists</span>
+      <span class="label-right">Three market failures.</span>
+    </div>
+    <div class="problem-blocks reveal-stagger">
+      <div class="problem-block">
+        <div class="p-num">01</div>
+        <h3>The Coordination Tax</h3>
+        <p>Companies don't have a productivity problem. They have a routing problem. Managers relay context. Meetings exist to synchronize state. Layers exist to translate between layers. Your org chart is an expensive, low-bandwidth network — and AI can replace it.</p>
+        <span class="tag">AI &amp; Automation</span>
+      </div>
+      <div class="problem-block">
+        <div class="p-num">02</div>
+        <h3>Technology Locked by Geography</h3>
+        <p>A system with thousands of proven installations in the US sits completely unknown in Europe, Australia, the Middle East. Those markets pay premium for inferior alternatives. The engineering exists — the distribution doesn't.</p>
+        <span class="tag">Global Sourcing</span>
+      </div>
+      <div class="problem-block">
+        <div class="p-num">03</div>
+        <h3>Talent That Won't Take a Salary</h3>
+        <p>The technical leader who could transform your operation won't take a flat salary — and the salary you'd offer won't attract the caliber you need. But equity tranched on milestones? Now the expert grows with the company. Incentives align.</p>
+        <span class="tag">Growth Partnerships</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW WE ENGAGE — DARK -->
+<section id="engage">
+  <div class="container">
+    <div class="section-label">
+      <span>§03 — How We Engage</span>
+      <span class="label-right">Flexible. Structured. Aligned.</span>
+    </div>
+    <div class="engage-layout">
+      <div class="engage-text reveal">
+        <h3>Multiple Ways to Work Together</h3>
+        <p>Not every engagement requires equity. Not every company needs AI. BeastTech structures each engagement around what the problem actually requires — from purchased project work to long-term growth partnerships.</p>
+        <p>We bring engineering rigor from a decade in industrial manufacturing — heat exchangers, nuclear systems, petrochemical infrastructure, international OEM operations — combined with production-grade AI system design.</p>
+      </div>
+      <div class="engage-models reveal-stagger">
+        <div class="engage-model">
+          <div class="model-tag">Project</div>
+          <div>
+            <h4>Purchased Services</h4>
+            <p>Scoped project work with fixed deliverables. AI system builds, automation design, sourcing engagements. Pay for what you need.</p>
+          </div>
+        </div>
+        <div class="engage-model">
+          <div class="model-tag">Retainer</div>
+          <div>
+            <h4>Ongoing Technical Advisory</h4>
+            <p>Fractional engineering leadership on retainer. Strategic guidance, system architecture, vendor evaluation, operational intelligence.</p>
+          </div>
+        </div>
+        <div class="engage-model">
+          <div class="model-tag">Growth</div>
+          <div>
+            <h4>Equity-Aligned Partnership</h4>
+            <p>BeastTech takes an embedded position in your company. Equity tranched on growth milestones. We build, we operate, we grow with you.</p>
+          </div>
+        </div>
+        <div class="engage-model">
+          <div class="model-tag">Source</div>
+          <div>
+            <h4>Technology Distribution</h4>
+            <p>We identify and deliver proven industrial technologies to your market. Import logistics, technical qualification, local support infrastructure.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="founder-bar reveal">
+      <p><strong>BeastTech Engineering</strong> was founded by a mechanical engineer with a decade in industrial manufacturing who used AI to build production systems that replaced entire software platforms — with zero coding background. That capability is now a firm.</p>
+      <div>
+        <div class="founder-name">Ben East</div>
+        <div class="founder-title">Founder &amp; Principal Engineer</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STRATEGIC ASSESSMENT -->
+<section id="assessment">
+  <div class="container">
+    <div class="section-label">
+      <span>§04 — Strategic Assessment</span>
+      <span class="label-right">Tell us where you're stuck.</span>
+    </div>
+    <div class="paper-sheet paper-sheet-wide reveal">
+      <div class="title-block">
+        <div class="tb-cell">Title<span class="tb-title">Capability Assessment</span></div>
+        <div class="tb-cell">Form No.<span class="tb-value">CA-001</span></div>
+        <div class="tb-cell">Class.<span class="tb-value">Confidential</span></div>
+      </div>
+      <div class="title-block-row2">
+        <div class="tb-cell">Prepared<span class="tb-value">BeastTech Eng.</span></div>
+        <div class="tb-cell">Date<span class="tb-value">2026-04</span></div>
+        <div class="tb-cell">Rev<span class="tb-value">A</span></div>
+        <div class="tb-cell">Status<span class="tb-value">Active</span></div>
+      </div>
+      <div class="division-body form-paper-body" id="formBody">
+        <p class="form-intro">This isn't a contact form. It's a structured intake. Tell us what's broken, what's missing, and what you'd build if you could. Every submission is reviewed personally by our engineering team.</p>
+        <form id="assessmentForm" class="form-grid">
+          <div class="form-group">
+            <label>Your Name <span class="req">*</span></label>
+            <input type="text" name="name" required placeholder="Full name">
+          </div>
+          <div class="form-group">
+            <label>Email <span class="req">*</span></label>
+            <input type="email" name="email" required placeholder="you@company.com">
+          </div>
+          <div class="form-group">
+            <label>Company</label>
+            <input type="text" name="company" placeholder="Company or organization">
+          </div>
+          <div class="form-group">
+            <label>Industry</label>
+            <select name="industry">
+              <option value="" disabled selected>Select industry</option>
+              <option>Manufacturing</option>
+              <option>Energy & Power Generation</option>
+              <option>Nuclear</option>
+              <option>Petrochemical & Oil/Gas</option>
+              <option>Construction & Infrastructure</option>
+              <option>HVAC & Mechanical Systems</option>
+              <option>Marine & Shipbuilding</option>
+              <option>Aerospace & Defense</option>
+              <option>Technology & Software</option>
+              <option>Professional Services</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Company Size</label>
+            <select name="company_size">
+              <option value="" disabled selected>Employees</option>
+              <option>1–10</option>
+              <option>11–50</option>
+              <option>51–200</option>
+              <option>201–500</option>
+              <option>500+</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Region</label>
+            <select name="region">
+              <option value="" disabled selected>Primary region</option>
+              <option>United States — East</option>
+              <option>United States — West</option>
+              <option>United States — Central / Gulf</option>
+              <option>Canada</option>
+              <option>United Kingdom</option>
+              <option>EU — Western Europe</option>
+              <option>EU — Eastern Europe</option>
+              <option>Middle East</option>
+              <option>Australia / New Zealand</option>
+              <option>Asia Pacific</option>
+              <option>Latin America</option>
+              <option>Africa</option>
+            </select>
+          </div>
+
+          <div class="form-divider"></div>
+
+          <div class="form-group full-width">
+            <label>What is your biggest operational bottleneck? <span class="req">*</span></label>
+            <select name="bottleneck_category" required>
+              <option value="" disabled selected>Select primary bottleneck</option>
+              <option value="coordination">Too many layers between decision and action</option>
+              <option value="technology-access">Need technology we can't access in our market</option>
+              <option value="talent">Can't find or afford the right technical leadership</option>
+              <option value="automation">Manual processes that should be automated</option>
+              <option value="data">Data exists but doesn't flow to the right people</option>
+              <option value="scaling">Systems that worked small are breaking at scale</option>
+              <option value="international">Need to source or distribute across borders</option>
+              <option value="other">Something else entirely</option>
+            </select>
+          </div>
+          <div class="form-group full-width">
+            <label>Describe it in your own words</label>
+            <textarea name="bottleneck_detail" placeholder="What would change if this problem disappeared overnight?"></textarea>
+          </div>
+          <div class="form-group full-width">
+            <label>What technology or capability do you wish you had access to?</label>
+            <textarea name="technology_wish" placeholder="A system, tool, process, or expertise that you know exists somewhere but can't get where you are."></textarea>
+          </div>
+
+          <div class="form-divider"></div>
+
+          <div class="form-group full-width">
+            <label>How would you prefer to engage?</label>
+            <div class="radio-row">
+              <div class="radio-opt">
+                <input type="radio" name="engage_pref" id="eng-project" value="project">
+                <label class="radio-label" for="eng-project">Purchased Project</label>
+              </div>
+              <div class="radio-opt">
+                <input type="radio" name="engage_pref" id="eng-retainer" value="retainer">
+                <label class="radio-label" for="eng-retainer">Retainer</label>
+              </div>
+              <div class="radio-opt">
+                <input type="radio" name="engage_pref" id="eng-equity" value="equity">
+                <label class="radio-label" for="eng-equity">Equity / Growth</label>
+              </div>
+              <div class="radio-opt">
+                <input type="radio" name="engage_pref" id="eng-unsure" value="unsure">
+                <label class="radio-label" for="eng-unsure">Not Sure Yet</label>
+              </div>
+            </div>
+          </div>
+          <div class="form-group full-width">
+            <label>Anything else we should know?</label>
+            <textarea name="additional" placeholder="Context, timeline, budget range, questions — whatever helps us understand your situation."></textarea>
+          </div>
+
+          <div class="form-submit-row">
+            <span class="form-privacy">Your data stays with BeastTech. No spam. No third parties.</span>
+            <button type="submit" class="form-submit">Submit Assessment</button>
+          </div>
+        </form>
+      </div>
+      <div class="assessment-success" id="formSuccess">
+        <div class="check-icon">✓</div>
+        <h3>Assessment Received</h3>
+        <p>Every submission is reviewed personally. If there's a fit, you'll hear from our team directly — typically within 48 hours.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER — DARK -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-left">© 2026 BeastTech Engineering. All rights reserved.</div>
+      <div class="footer-links">
+        <a href="mailto:info@beasttechengineering.com">info@beasttechengineering.com</a>
+        <a href="https://x.com/beneast" target="_blank" rel="noopener">@beneast</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -30px 0px' });
+
+document.querySelectorAll('.reveal, .reveal-stagger').forEach(el => observer.observe(el));
+
+document.getElementById('assessmentForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const fd = new FormData(this);
+  const data = {};
+  fd.forEach((v, k) => { data[k] = v; });
+  data.submitted_at = new Date().toISOString();
+  const store = JSON.parse(localStorage.getItem('beasttech_assessments') || '[]');
+  store.push(data);
+  localStorage.setItem('beasttech_assessments', JSON.stringify(store));
+  document.getElementById('formBody').style.display = 'none';
+  document.getElementById('formSuccess').classList.add('visible');
+});
+
+let lastY = 0;
+window.addEventListener('scroll', () => {
+  const y = window.pageYOffset;
+  document.querySelector('nav').style.transform = (y > lastY && y > 150) ? 'translateY(-100%)' : 'translateY(0)';
+  lastY = y;
+}, { passive: true });
+
+document.querySelectorAll('.nav-links a').forEach(a => {
+  a.addEventListener('click', () => document.querySelector('.nav-links').classList.remove('open'));
+});
+</script>
+
+</body>
+</html>
