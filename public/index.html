@@ -1360,7 +1360,7 @@ document.getElementById('assessmentForm').addEventListener('submit', function(e)
 });
 
 function sendToEmail(type, data) {
-  fetch('/api/submit', {
+  fetch('https://beasttech-form-handler.ben-east.workers.dev', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ type: type, data: data })
