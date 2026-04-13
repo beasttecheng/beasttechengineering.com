@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BeastTech Logo — Refined Direction</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Share+Tech+Mono&family=Rajdhani:wght@300;400;500;600;700&family=Russo+One&family=Teko:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Share Tech Mono', monospace;
+  min-height: 100vh;
+}
+
+h1 {
+  text-align: center;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: #2a6e2a;
+  margin-bottom: 8px;
+}
+
+.subtitle {
+  text-align: center;
+  font-size: 11px;
+  color: #6a8a6a;
+  letter-spacing: 0.2em;
+  margin-bottom: 48px;
+}
+
+/* ==========================================
+   ENGINEERING PAPER BACKGROUND
+   American 5x5 grid, green-tinted paper,
+   grid on backside showing through
+   ========================================== */
+.eng-paper {
+  /* The paper itself — warm light green */
+  background-color: #D6E4CC;
+  position: relative;
+  padding: 40px 20px;
+}
+
+.eng-paper::before {
+  content: '';
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  /*
+    Layered grid:
+    1. Major 5x5 grid lines (thicker, more visible) — every 100px
+    2. Minor grid lines (thin, subtle) — every 20px
+    The "showing through from back" effect = slightly blurred/soft edges
+  */
+  background-image:
+    /* Major horizontal lines */
+    linear-gradient(
+      to bottom,
+      rgba(74, 132, 74, 0.35) 0px,
+      rgba(74, 132, 74, 0.35) 1.5px,
+      transparent 1.5px
+    ),
+    /* Major vertical lines */
+    linear-gradient(
+      to right,
+      rgba(74, 132, 74, 0.35) 0px,
+      rgba(74, 132, 74, 0.35) 1.5px,
+      transparent 1.5px
+    ),
+    /* Minor horizontal lines */
+    linear-gradient(
+      to bottom,
+      rgba(74, 132, 74, 0.14) 0px,
+      rgba(74, 132, 74, 0.14) 0.5px,
+      transparent 0.5px
+    ),
+    /* Minor vertical lines */
+    linear-gradient(
+      to right,
+      rgba(74, 132, 74, 0.14) 0px,
+      rgba(74, 132, 74, 0.14) 0.5px,
+      transparent 0.5px
+    );
+  background-size:
+    100% 100px,   /* major horiz */
+    100px 100%,   /* major vert */
+    100% 20px,    /* minor horiz */
+    20px 100%;    /* minor vert */
+  pointer-events: none;
+  z-index: 0;
+  /* Subtle softness — simulating grid bleeding through from backside */
+  filter: blur(0.2px);
+}
+
+/* Paper texture — subtle fiber noise */
+.eng-paper::after {
+  content: '';
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 1;
+}
+
+.content {
+  position: relative;
+  z-index: 2;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* ==========================================
+   CARD SYSTEM
+   ========================================== */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+  gap: 32px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.card {
+  position: relative;
+  padding: 60px 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+}
+
+/* Dark cards — logo on dark background */
+.card.dark {
+  background: #0a0a0a;
+  border: 1px solid rgba(74, 132, 74, 0.2);
+  box-shadow: 0 2px 20px rgba(0,0,0,0.3);
+}
+
+/* Light cards — logo on engineering paper */
+.card.light {
+  background: transparent;
+  border: 1.5px solid rgba(74, 132, 74, 0.25);
+}
+
+.card-num {
+  position: absolute;
+  top: 14px;
+  left: 18px;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: #6a8a6a;
+}
+
+.card-label {
+  position: absolute;
+  bottom: 14px;
+  left: 18px;
+  right: 18px;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  color: #6a8a6a;
+  text-align: center;
+}
+
+.card.dark .card-num { color: #333; }
+.card.dark .card-label { color: #444; }
+
+/* ==========================================
+   REFINED LOGO — BASE STYLES
+   BEAST = solid white/dark, heavy
+   TECH = wireframe outline, green, glowing
+   ENGINEERING = crisp, clear, authoritative
+   ========================================== */
+
+/* --- VARIANT A: Dark background, full glow --- */
+.logo-a {
+  text-align: center;
+  line-height: 1;
+}
+
+.logo-a .beast {
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 900;
+  font-size: 62px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #ffffff;
+  display: block;
+  text-shadow: 0 0 3px rgba(255,255,255,0.4);
+}
+
+.logo-a .tech {
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 700;
+  font-size: 62px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: transparent;
+  -webkit-text-stroke: 1.5px #00FF41;
+  display: block;
+  margin-top: -4px;
+  filter: drop-shadow(0 0 4px rgba(0,255,65,0.4)) drop-shadow(0 0 15px rgba(0,255,65,0.15));
+}
+
+.logo-a .engineering {
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  letter-spacing: 0.55em;
+  text-transform: uppercase;
+  color: #ffffff;
+  display: block;
+  margin-top: 12px;
+  padding-left: 0.55em;
+}
+
+/* --- VARIANT B: Dark bg, thinner wireframe TECH --- */
+.logo-b {
+  text-align: center;
+  line-height: 1;
+}
+
+.logo-b .beast {
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 900;
+  font-size: 58px;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: #fff;
+  display: block;
+  text-shadow: 0 0 2px rgba(255,255,255,0.3);
+}
+
+.logo-b .tech {
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 700;
+  font-size: 58px;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: transparent;
+  -webkit-text-stroke: 1px #00FF41;
+  display: block;
+  margin-top: -2px;
+  filter: drop-shadow(0 0 3px rgba(0,255,65,0.35)) drop-shadow(0 0 12px rgba(0,255,65,0.12));
+}
+
+.logo-b .engineering {
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  letter-spacing: 0.45em;
+  text-transform: uppercase;
+  color: #fff;
+  display: block;
+  margin-top: 14px;
+  padding-left: 0.45em;
+}
+
+/* --- VARIANT C: Dark bg, Teko tall condensed BEAST, wireframe TECH --- */
+.logo-c {
+  text-align: center;
+  line-height: 1;
+}
+
+.logo-c .beast {
+  font-family: 'Teko', sans-serif;
+  font-weight: 600;
+  font-size: 88px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #fff;
+  display: block;
+  text-shadow: 0 0 2px rgba(255,255,255,0.3);
+}
+
+.logo-c .tech {
+  font-family: 'Teko', sans-serif;
+  font-weight: 600;
+  font-size: 88px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: transparent;
+  -webkit-text-stroke: 1.5px #00FF41;
+  display: block;
+  margin-top: -22px;
+  filter: drop-shadow(0 0 4px rgba(0,255,65,0.4)) drop-shadow(0 0 18px rgba(0,255,65,0.15));
+}
+
+.logo-c .engineering {
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 500;
+  font-size: 13px;
+  letter-spacing: 0.5em;
+  text-transform: uppercase;
+  color: #fff;
+  display: block;
+  margin-top: 10px;
+  padding-left: 0.5em;
+}
+
+/* --- VARIANT D: On engineering paper (dark text) --- */
+.logo-d {
+  text-align: center;
+  line-height: 1;
+}
+
+.logo-d .beast {
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 900;
+  font-size: 58px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #1a1a1a;
+  display: block;
+}
+
+.logo-d .tech {
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 700;
+  font-size: 58px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: transparent;
+  -webkit-text-stroke: 1.5px #2d7a2d;
+  display: block;
+  margin-top: -2px;
+}
+
+.logo-d .engineering {
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 500;
+  font-size: 13px;
+  letter-spacing: 0.5em;
+  text-transform: uppercase;
+  color: #1a1a1a;
+  display: block;
+  margin-top: 14px;
+  padding-left: 0.5em;
+}
+
+/* --- VARIANT E: On paper, CAD style with crosshairs --- */
+.logo-e-wrap {
+  position: relative;
+  padding: 28px 36px;
+}
+
+.logo-e-wrap .ch {
+  position: absolute;
+  width: 14px; height: 14px;
+}
+
+.logo-e-wrap .ch::before,
+.logo-e-wrap .ch::after {
+  content: '';
+  position: absolute;
+  background: rgba(45, 122, 45, 0.35);
+}
+
+.logo-e-wrap .ch::before {
+  width: 0.5px; height: 100%;
+  top: 0; left: 50%;
+}
+
+.logo-e-wrap .ch::after {
+  width: 100%; height: 0.5px;
+  top: 50%; left: 0;
+}
+
+.logo-e-wrap .ch .circ {
+  position: absolute;
+  top: 2px; left: 2px; right: 2px; bottom: 2px;
+  border: 0.5px solid rgba(45, 122, 45, 0.3);
+  border-radius: 50%;
+}
+
+.logo-e-wrap .ch:nth-child(1) { top: -7px; left: -7px; }
+.logo-e-wrap .ch:nth-child(2) { top: -7px; right: -7px; }
+.logo-e-wrap .ch:nth-child(3) { bottom: -7px; left: -7px; }
+.logo-e-wrap .ch:nth-child(4) { bottom: -7px; right: -7px; }
+
+.logo-e-wrap .dim {
+  position: absolute;
+  font-size: 8px;
+  color: rgba(45, 122, 45, 0.3);
+  letter-spacing: 0.1em;
+}
+
+.logo-e-wrap .dim-top { top: -4px; right: 20px; }
+.logo-e-wrap .dim-bot { bottom: -4px; left: 20px; }
+
+.logo-e {
+  text-align: center;
+  line-height: 1;
+}
+
+.logo-e .beast {
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 900;
+  font-size: 52px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #1a1a1a;
+  display: block;
+}
+
+.logo-e .tech {
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 700;
+  font-size: 52px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: transparent;
+  -webkit-text-stroke: 1.2px #2d7a2d;
+  display: block;
+  margin-top: -2px;
+}
+
+.logo-e .engineering {
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: 0.45em;
+  text-transform: uppercase;
+  color: #1a1a1a;
+  display: block;
+  margin-top: 12px;
+  padding-left: 0.45em;
+}
+
+/* --- VARIANT F: Dark bg, BEAST solid, TECH dual-stroke (CAD double line) --- */
+.logo-f {
+  text-align: center;
+  line-height: 1;
+  position: relative;
+}
+
+.logo-f .beast {
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 900;
+  font-size: 60px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #fff;
+  display: block;
+  text-shadow: 0 0 2px rgba(255,255,255,0.3);
+}
+
+.logo-f .tech-wrap {
+  position: relative;
+  display: block;
+  margin-top: -4px;
+  height: 60px;
+}
+
+.logo-f .tech-outer {
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 700;
+  font-size: 60px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: transparent;
+  -webkit-text-stroke: 2px #00FF41;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  filter: drop-shadow(0 0 6px rgba(0,255,65,0.3));
+}
+
+.logo-f .tech-inner {
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 700;
+  font-size: 56px;
+  letter-spacing: 0.075em;
+  text-transform: uppercase;
+  color: transparent;
+  -webkit-text-stroke: 0.5px rgba(0,255,65,0.3);
+  position: absolute;
+  top: 2px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.logo-f .engineering {
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  letter-spacing: 0.5em;
+  text-transform: uppercase;
+  color: #fff;
+  display: block;
+  margin-top: 14px;
+  padding-left: 0.5em;
+}
+
+/* --- VARIANT G: Minimal — dark bg, very clean --- */
+.logo-g {
+  text-align: center;
+  line-height: 1;
+}
+
+.logo-g .beast {
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 700;
+  font-size: 64px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #fff;
+  display: block;
+}
+
+.logo-g .tech {
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 700;
+  font-size: 64px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: transparent;
+  -webkit-text-stroke: 1px #00FF41;
+  display: block;
+  margin-top: -12px;
+  filter: drop-shadow(0 0 3px rgba(0,255,65,0.3));
+}
+
+.logo-g .engineering {
+  font-family: 'Share Tech Mono', monospace;
+  font-weight: 400;
+  font-size: 13px;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: #fff;
+  display: block;
+  margin-top: 16px;
+  padding-left: 0.4em;
+}
+
+/* --- VARIANT H: Dark bg, Russo One heavy + green glow wireframe --- */
+.logo-h {
+  text-align: center;
+  line-height: 1;
+}
+
+.logo-h .beast {
+  font-family: 'Russo One', sans-serif;
+  font-size: 56px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #fff;
+  display: block;
+  text-shadow: 0 0 3px rgba(255,255,255,0.3);
+}
+
+.logo-h .tech {
+  font-family: 'Russo One', sans-serif;
+  font-size: 56px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: transparent;
+  -webkit-text-stroke: 1.5px #00FF41;
+  display: block;
+  margin-top: -2px;
+  filter: drop-shadow(0 0 5px rgba(0,255,65,0.4)) drop-shadow(0 0 20px rgba(0,255,65,0.12));
+}
+
+.logo-h .engineering {
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 0.55em;
+  text-transform: uppercase;
+  color: #fff;
+  display: block;
+  margin-top: 14px;
+  padding-left: 0.55em;
+}
+
+/* --- VARIANT I: Engineering paper, Teko condensed, hand-drafted feel --- */
+.logo-i {
+  text-align: center;
+  line-height: 1;
+}
+
+.logo-i .beast {
+  font-family: 'Teko', sans-serif;
+  font-weight: 600;
+  font-size: 82px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #1a1a1a;
+  display: block;
+}
+
+.logo-i .tech {
+  font-family: 'Teko', sans-serif;
+  font-weight: 600;
+  font-size: 82px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: transparent;
+  -webkit-text-stroke: 1.2px #2d7a2d;
+  display: block;
+  margin-top: -20px;
+}
+
+.logo-i .rule {
+  display: block;
+  width: 80%;
+  max-width: 320px;
+  height: 1.5px;
+  background: #2d7a2d;
+  margin: 8px auto 0;
+}
+
+.logo-i .engineering {
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 600;
+  font-size: 18px;
+  letter-spacing: 0.45em;
+  text-transform: uppercase;
+  color: #1a1a1a;
+  display: block;
+  margin-top: 10px;
+  padding-left: 0.45em;
+}
+
+/* --- VARIANT J: Dark bg, stacked tight, green line accent --- */
+.logo-j {
+  text-align: center;
+  line-height: 1;
+}
+
+.logo-j .beast {
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 900;
+  font-size: 56px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #fff;
+  display: block;
+  text-shadow: 0 0 2px rgba(255,255,255,0.25);
+}
+
+.logo-j .tech {
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 700;
+  font-size: 56px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: transparent;
+  -webkit-text-stroke: 1.2px #00FF41;
+  display: block;
+  margin-top: -2px;
+  filter: drop-shadow(0 0 4px rgba(0,255,65,0.35));
+}
+
+.logo-j .line-accent {
+  display: block;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #00FF41, transparent);
+  box-shadow: 0 0 6px rgba(0,255,65,0.3);
+  margin: 10px 0;
+}
+
+.logo-j .engineering {
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: #fff;
+  display: block;
+  padding-left: 0.4em;
+}
+
+@media (max-width: 540px) {
+  .grid { grid-template-columns: 1fr; }
+  .card { padding: 48px 20px; min-height: 240px; }
+  .logo-a .beast, .logo-a .tech { font-size: 40px; }
+  .logo-b .beast, .logo-b .tech { font-size: 38px; }
+  .logo-c .beast, .logo-c .tech { font-size: 56px; }
+  .logo-d .beast, .logo-d .tech { font-size: 38px; }
+  .logo-e .beast, .logo-e .tech { font-size: 34px; }
+  .logo-f .beast { font-size: 40px; }
+  .logo-f .tech-outer { font-size: 40px; }
+  .logo-f .tech-inner { font-size: 37px; }
+  .logo-f .tech-wrap { height: 42px; }
+  .logo-g .beast, .logo-g .tech { font-size: 42px; }
+  .logo-h .beast, .logo-h .tech { font-size: 36px; }
+  .logo-i .beast, .logo-i .tech { font-size: 52px; }
+  .logo-j .beast, .logo-j .tech { font-size: 36px; }
+}
+</style>
+</head>
+<body class="eng-paper">
+
+<div class="content">
+<h1>BeastTech — Refined Logo Direction</h1>
+<p class="subtitle">BEAST (SOLID) + TECH (WIREFRAME) + ENGINEERING (CRISP) // ON ENGINEERING PAPER + DARK</p>
+
+<div class="grid">
+
+  <!-- A: Orbitron, dark, full glow -->
+  <div class="card dark">
+    <span class="card-num">A</span>
+    <div class="logo-a">
+      <span class="beast">BEAST</span>
+      <span class="tech">TECH</span>
+      <span class="engineering">ENGINEERING</span>
+    </div>
+    <span class="card-label">Orbitron heavy — wireframe TECH with glow — crisp ENGINEERING — dark</span>
+  </div>
+
+  <!-- B: Orbitron, dark, thinner stroke, Rajdhani engineering -->
+  <div class="card dark">
+    <span class="card-num">B</span>
+    <div class="logo-b">
+      <span class="beast">BEAST</span>
+      <span class="tech">TECH</span>
+      <span class="engineering">ENGINEERING</span>
+    </div>
+    <span class="card-label">Thinner wireframe stroke — Rajdhani ENGINEERING for warmth — dark</span>
+  </div>
+
+  <!-- C: Teko condensed, Stranger Things height -->
+  <div class="card dark">
+    <span class="card-num">C</span>
+    <div class="logo-c">
+      <span class="beast">BEAST</span>
+      <span class="tech">TECH</span>
+      <span class="engineering">ENGINEERING</span>
+    </div>
+    <span class="card-label">Teko condensed tall — Stranger Things proportion — wireframe TECH — dark</span>
+  </div>
+
+  <!-- D: On engineering paper, dark ink -->
+  <div class="card light">
+    <span class="card-num">D</span>
+    <div class="logo-d">
+      <span class="beast">BEAST</span>
+      <span class="tech">TECH</span>
+      <span class="engineering">ENGINEERING</span>
+    </div>
+    <span class="card-label">On engineering paper — dark ink BEAST — green wireframe TECH — crisp</span>
+  </div>
+
+  <!-- E: On engineering paper, with CAD crosshairs -->
+  <div class="card light">
+    <span class="card-num">E</span>
+    <div class="logo-e-wrap">
+      <div class="ch"><div class="circ"></div></div>
+      <div class="ch"><div class="circ"></div></div>
+      <div class="ch"><div class="circ"></div></div>
+      <div class="ch"><div class="circ"></div></div>
+      <span class="dim dim-top">DWG: BTE-001</span>
+      <span class="dim dim-bot">REV A // 2026</span>
+      <div class="logo-e">
+        <span class="beast">BEAST</span>
+        <span class="tech">TECH</span>
+        <span class="engineering">ENGINEERING</span>
+      </div>
+    </div>
+    <span class="card-label">CAD crosshairs + dimension labels — on engineering paper — full drafting treatment</span>
+  </div>
+
+  <!-- F: Dual-stroke wireframe TECH (CAD double parallel lines) -->
+  <div class="card dark">
+    <span class="card-num">F</span>
+    <div class="logo-f">
+      <span class="beast">BEAST</span>
+      <div class="tech-wrap">
+        <span class="tech-outer">TECH</span>
+        <span class="tech-inner">TECH</span>
+      </div>
+      <span class="engineering">ENGINEERING</span>
+    </div>
+    <span class="card-label">Dual-parallel wireframe TECH (CAD double-line) — solid BEAST — dark</span>
+  </div>
+
+  <!-- G: Rajdhani minimal clean -->
+  <div class="card dark">
+    <span class="card-num">G</span>
+    <div class="logo-g">
+      <span class="beast">BEAST</span>
+      <span class="tech">TECH</span>
+      <span class="engineering">ENGINEERING</span>
+    </div>
+    <span class="card-label">Rajdhani clean minimal — lighter wireframe — mono ENGINEERING — dark</span>
+  </div>
+
+  <!-- H: Russo One heavy -->
+  <div class="card dark">
+    <span class="card-num">H</span>
+    <div class="logo-h">
+      <span class="beast">BEAST</span>
+      <span class="tech">TECH</span>
+      <span class="engineering">ENGINEERING</span>
+    </div>
+    <span class="card-label">Russo One industrial heavy — strong glow bloom — Orbitron ENGINEERING — dark</span>
+  </div>
+
+  <!-- I: On paper, Teko tall, rule line, hand-drafted -->
+  <div class="card light">
+    <span class="card-num">I</span>
+    <div class="logo-i">
+      <span class="beast">BEAST</span>
+      <span class="tech">TECH</span>
+      <span class="rule"></span>
+      <span class="engineering">ENGINEERING</span>
+    </div>
+    <span class="card-label">Teko tall on paper — green rule divider — hand-drafted feel — Rajdhani ENGINEERING</span>
+  </div>
+
+  <!-- J: Orbitron, dark, green line accent between TECH and ENGINEERING -->
+  <div class="card dark">
+    <span class="card-num">J</span>
+    <div class="logo-j">
+      <span class="beast">BEAST</span>
+      <span class="tech">TECH</span>
+      <span class="line-accent"></span>
+      <span class="engineering">ENGINEERING</span>
+    </div>
+    <span class="card-label">Glowing green divider line — ENGINEERING prominent and crisp — dark</span>
+  </div>
+
+</div>
+</div>
+
+</body>
+</html>

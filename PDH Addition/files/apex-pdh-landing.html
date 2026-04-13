@@ -1,0 +1,1239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>APEX PDH — AI Continuing Education for Licensed Professionals</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Mono:wght@400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0a0a0a;
+    --cream: #f4f1ea;
+    --gold: #c9a84c;
+    --gold-light: #e8d5a3;
+    --rule: #1a1a1a;
+    --muted: #5a5a5a;
+    --accent-red: #8b1a1a;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* ── MASTHEAD ── */
+  .masthead {
+    background: var(--ink);
+    color: var(--cream);
+    padding: 0 48px;
+    border-bottom: 3px solid var(--gold);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .masthead-logo {
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  .masthead-nav {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+
+  .masthead-nav a {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--cream);
+    text-decoration: none;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+  }
+
+  .masthead-nav a:hover { opacity: 1; }
+
+  .masthead-cta {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    background: var(--gold);
+    color: var(--ink);
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background 0.2s;
+  }
+
+  .masthead-cta:hover { background: var(--gold-light); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 90vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    overflow: hidden;
+  }
+
+  .hero-left {
+    padding: 80px 64px 80px 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: var(--cream);
+    border-right: 1px solid var(--ink);
+    animation: fadeUp 0.8s ease both;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-kicker {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .hero-kicker::before {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 1px;
+    background: var(--gold);
+  }
+
+  .hero-headline {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(42px, 5vw, 72px);
+    font-weight: 900;
+    line-height: 1.0;
+    color: var(--ink);
+    margin-bottom: 12px;
+  }
+
+  .hero-headline em {
+    font-style: italic;
+    color: var(--accent-red);
+  }
+
+  .hero-subhead {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(18px, 2vw, 26px);
+    font-weight: 400;
+    font-style: italic;
+    color: var(--muted);
+    margin-bottom: 40px;
+    line-height: 1.4;
+  }
+
+  .hero-body {
+    font-size: 16px;
+    line-height: 1.75;
+    color: var(--muted);
+    max-width: 480px;
+    margin-bottom: 48px;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    background: var(--ink);
+    color: var(--cream);
+    border: 2px solid var(--ink);
+    padding: 16px 32px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.2s;
+    text-decoration: none;
+    display: inline-block;
+  }
+
+  .btn-primary:hover {
+    background: transparent;
+    color: var(--ink);
+  }
+
+  .btn-secondary {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    background: transparent;
+    color: var(--muted);
+    border: 2px solid currentColor;
+    padding: 16px 32px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.2s;
+    text-decoration: none;
+    display: inline-block;
+  }
+
+  .btn-secondary:hover { color: var(--ink); border-color: var(--ink); }
+
+  .hero-right {
+    background: var(--ink);
+    padding: 80px 64px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    animation: fadeUp 0.8s 0.15s ease both;
+    opacity: 0;
+    animation-fill-mode: both;
+  }
+
+  .hero-stat-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 48px;
+  }
+
+  .stat-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px 48px;
+    margin-bottom: 56px;
+  }
+
+  .stat-item {}
+
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 52px;
+    font-weight: 900;
+    color: var(--cream);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .stat-unit {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    color: var(--gold);
+  }
+
+  .stat-desc {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--cream);
+    opacity: 0.5;
+    line-height: 1.6;
+  }
+
+  .hero-rule {
+    border: none;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    margin-bottom: 40px;
+  }
+
+  .profession-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .ptag {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    border: 1px solid rgba(201, 168, 76, 0.4);
+    color: var(--gold);
+    padding: 6px 12px;
+  }
+
+  /* ── TICKER ── */
+  .ticker {
+    background: var(--gold);
+    padding: 12px 0;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  .ticker-inner {
+    display: inline-block;
+    animation: ticker 25s linear infinite;
+  }
+
+  @keyframes ticker {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  .ticker-text {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--ink);
+    padding: 0 40px;
+  }
+
+  .ticker-sep {
+    color: var(--accent-red);
+    padding: 0 8px;
+  }
+
+  /* ── SECTION SCAFFOLDING ── */
+  section { padding: 96px 80px; }
+
+  .section-kicker {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .section-kicker::after {
+    content: '';
+    display: block;
+    flex: 1;
+    height: 1px;
+    background: rgba(201, 168, 76, 0.3);
+    max-width: 120px;
+  }
+
+  .section-headline {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(32px, 4vw, 52px);
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 24px;
+  }
+
+  .section-subhead {
+    font-size: 16px;
+    line-height: 1.75;
+    color: var(--muted);
+    max-width: 600px;
+    margin-bottom: 64px;
+  }
+
+  /* ── THE PROBLEM ── */
+  .problem {
+    background: var(--ink);
+    color: var(--cream);
+  }
+
+  .problem .section-headline { color: var(--cream); }
+  .problem .section-subhead { color: rgba(244, 241, 234, 0.6); }
+
+  .problem-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: rgba(255,255,255,0.1);
+  }
+
+  .problem-card {
+    background: var(--ink);
+    padding: 48px 36px;
+    transition: background 0.3s;
+  }
+
+  .problem-card:hover { background: #141414; }
+
+  .problem-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 72px;
+    font-weight: 900;
+    color: var(--gold);
+    opacity: 0.3;
+    line-height: 1;
+    margin-bottom: 24px;
+  }
+
+  .problem-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--cream);
+    margin-bottom: 16px;
+  }
+
+  .problem-card p {
+    font-size: 14px;
+    line-height: 1.8;
+    color: rgba(244, 241, 234, 0.55);
+  }
+
+  /* ── COURSES ── */
+  .courses { background: var(--cream); }
+
+  .course-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 48px;
+  }
+
+  .course-table thead tr {
+    border-bottom: 2px solid var(--ink);
+  }
+
+  .course-table th {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding: 0 0 16px;
+    text-align: left;
+    font-weight: 500;
+  }
+
+  .course-table th:last-child { text-align: right; }
+
+  .course-table tbody tr {
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+    transition: background 0.2s;
+  }
+
+  .course-table tbody tr:hover { background: rgba(201, 168, 76, 0.06); }
+
+  .course-table td {
+    padding: 24px 0;
+    vertical-align: middle;
+  }
+
+  .course-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+
+  .course-desc {
+    font-size: 13px;
+    color: var(--muted);
+  }
+
+  .course-pdh {
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+  }
+
+  .course-prof {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  .prof-badge {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    border: 1px solid rgba(0,0,0,0.2);
+    color: var(--muted);
+    padding: 3px 8px;
+  }
+
+  .course-price {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--ink);
+    text-align: right;
+  }
+
+  .ethics-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    background: var(--accent-red);
+    color: #fff;
+    padding: 3px 8px;
+    margin-left: 8px;
+  }
+
+  /* ── HOW IT WORKS ── */
+  .how { background: #f9f7f2; border-top: 1px solid rgba(0,0,0,0.06); border-bottom: 1px solid rgba(0,0,0,0.06); }
+
+  .how-steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 48px;
+    position: relative;
+  }
+
+  .how-steps::before {
+    content: '';
+    position: absolute;
+    top: 28px;
+    left: calc(12.5% + 16px);
+    right: calc(12.5% + 16px);
+    height: 1px;
+    background: var(--gold);
+    opacity: 0.3;
+  }
+
+  .how-step {}
+
+  .step-dot {
+    width: 56px;
+    height: 56px;
+    border: 2px solid var(--gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 24px;
+    position: relative;
+    background: var(--cream);
+  }
+
+  .step-dot-inner {
+    width: 12px;
+    height: 12px;
+    background: var(--gold);
+  }
+
+  .step-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    margin-bottom: 12px;
+  }
+
+  .step-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+
+  .step-body {
+    font-size: 14px;
+    line-height: 1.75;
+    color: var(--muted);
+  }
+
+  /* ── WORKSHOP ── */
+  .workshop {
+    background: var(--accent-red);
+    color: var(--cream);
+  }
+
+  .workshop-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 96px;
+    align-items: center;
+  }
+
+  .workshop .section-headline { color: var(--cream); }
+
+  .workshop-details {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .workshop-detail {
+    display: flex;
+    gap: 20px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid rgba(255,255,255,0.15);
+  }
+
+  .workshop-detail:last-child { border-bottom: none; padding-bottom: 0; }
+
+  .wd-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+    width: 90px;
+    flex-shrink: 0;
+    padding-top: 2px;
+  }
+
+  .wd-value {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--cream);
+  }
+
+  .wd-sub {
+    font-size: 13px;
+    color: rgba(255,255,255,0.6);
+    margin-top: 2px;
+  }
+
+  .workshop-cta {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    background: var(--cream);
+    color: var(--accent-red);
+    border: none;
+    padding: 18px 36px;
+    cursor: pointer;
+    font-weight: 500;
+    margin-top: 16px;
+    display: inline-block;
+    text-decoration: none;
+    transition: opacity 0.2s;
+  }
+
+  .workshop-cta:hover { opacity: 0.85; }
+
+  /* ── PRICING ── */
+  .pricing { background: var(--ink); }
+
+  .pricing .section-headline { color: var(--cream); }
+  .pricing .section-subhead { color: rgba(244,241,234,0.55); }
+
+  .pricing-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    background: rgba(255,255,255,0.05);
+  }
+
+  .pricing-card {
+    background: #111;
+    padding: 48px 36px;
+    position: relative;
+  }
+
+  .pricing-card.featured {
+    background: var(--gold);
+  }
+
+  .pricing-card.featured * { color: var(--ink) !important; }
+  .pricing-card.featured .pricing-feature { border-color: rgba(0,0,0,0.15) !important; }
+  .pricing-card.featured .pricing-feature::before { background: var(--ink) !important; }
+
+  .pricing-badge {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    background: var(--accent-red);
+    color: #fff !important;
+    padding: 4px 10px;
+    position: absolute;
+    top: 24px;
+    right: 24px;
+  }
+
+  .pricing-tier {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 20px;
+  }
+
+  .pricing-card.featured .pricing-tier { color: var(--ink); }
+
+  .pricing-price {
+    font-family: 'Playfair Display', serif;
+    font-size: 56px;
+    font-weight: 900;
+    color: var(--cream);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .pricing-period {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: rgba(244,241,234,0.4);
+    margin-bottom: 36px;
+  }
+
+  .pricing-features {
+    list-style: none;
+    margin-bottom: 40px;
+  }
+
+  .pricing-feature {
+    font-size: 14px;
+    color: rgba(244,241,234,0.7);
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .pricing-feature::before {
+    content: '';
+    display: block;
+    width: 5px;
+    height: 5px;
+    background: var(--gold);
+    margin-top: 6px;
+    flex-shrink: 0;
+  }
+
+  .pricing-btn {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    background: transparent;
+    color: var(--cream);
+    border: 1px solid rgba(255,255,255,0.25);
+    padding: 14px 24px;
+    cursor: pointer;
+    width: 100%;
+    transition: all 0.2s;
+  }
+
+  .pricing-btn:hover { border-color: var(--gold); color: var(--gold); }
+
+  /* ── EMAIL CAPTURE ── */
+  .email-capture {
+    background: var(--cream);
+    padding: 96px 80px;
+    text-align: center;
+  }
+
+  .email-capture .section-kicker { justify-content: center; }
+  .email-capture .section-kicker::after { display: none; }
+
+  .email-form {
+    display: flex;
+    gap: 0;
+    max-width: 520px;
+    margin: 0 auto;
+  }
+
+  .email-input {
+    flex: 1;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    padding: 16px 24px;
+    border: 2px solid var(--ink);
+    border-right: none;
+    background: white;
+    outline: none;
+  }
+
+  .email-submit {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    background: var(--ink);
+    color: var(--cream);
+    border: 2px solid var(--ink);
+    padding: 0 28px;
+    cursor: pointer;
+    font-weight: 500;
+    white-space: nowrap;
+    transition: background 0.2s;
+  }
+
+  .email-submit:hover { background: #333; }
+
+  .email-sub {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 20px;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--ink);
+    color: rgba(244,241,234,0.4);
+    padding: 48px 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid var(--gold);
+  }
+
+  .footer-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    font-weight: 900;
+    color: var(--cream);
+  }
+
+  .footer-logo span {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    display: block;
+    margin-top: 4px;
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 24px;
+    list-style: none;
+  }
+
+  .footer-links a {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(244,241,234,0.4);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .footer-links a:hover { color: var(--gold); }
+
+  .footer-copy {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    color: rgba(244,241,234,0.25);
+  }
+
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; }
+    .hero-right { display: none; }
+    .problem-grid { grid-template-columns: 1fr; }
+    .how-steps { grid-template-columns: 1fr 1fr; }
+    .how-steps::before { display: none; }
+    .pricing-cards { grid-template-columns: 1fr; }
+    .workshop-grid { grid-template-columns: 1fr; }
+    section { padding: 64px 32px; }
+    footer { flex-direction: column; gap: 24px; text-align: center; }
+    .masthead { padding: 0 24px; }
+    .masthead-nav { display: none; }
+    .course-table { font-size: 13px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- MASTHEAD -->
+<header class="masthead">
+  <div class="masthead-logo">APEX PDH</div>
+  <nav>
+    <ul class="masthead-nav">
+      <li><a href="#courses">Courses</a></li>
+      <li><a href="#workshops">Workshops</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="#about">About</a></li>
+    </ul>
+  </nav>
+  <button class="masthead-cta">Get Free Checklist</button>
+</header>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-inner">
+    <span class="ticker-text">AI Fundamentals for PEs <span class="ticker-sep">◆</span> Multi-Agent Workflows <span class="ticker-sep">◆</span> AI Ethics & Professional Liability <span class="ticker-sep">◆</span> Prompt Engineering for CPAs <span class="ticker-sep">◆</span> Regulatory Landscape <span class="ticker-sep">◆</span> Claude Cowork Intensive <span class="ticker-sep">◆</span> AI in Legal Practice <span class="ticker-sep">◆</span> PDH Approved <span class="ticker-sep">◆</span> CPE Approved <span class="ticker-sep">◆</span> CLE Approved</span>
+    <span class="ticker-text">AI Fundamentals for PEs <span class="ticker-sep">◆</span> Multi-Agent Workflows <span class="ticker-sep">◆</span> AI Ethics & Professional Liability <span class="ticker-sep">◆</span> Prompt Engineering for CPAs <span class="ticker-sep">◆</span> Regulatory Landscape <span class="ticker-sep">◆</span> Claude Cowork Intensive <span class="ticker-sep">◆</span> AI in Legal Practice <span class="ticker-sep">◆</span> PDH Approved <span class="ticker-sep">◆</span> CPE Approved <span class="ticker-sep">◆</span> CLE Approved</span>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero" style="padding:0;">
+  <div class="hero-left">
+    <div class="hero-kicker">Professional Continuing Education</div>
+    <h1 class="hero-headline">
+      Stay Licensed.<br>
+      Stay <em>Relevant.</em>
+    </h1>
+    <p class="hero-subhead">AI continuing education built by a licensed PE, for professionals who can't afford to be left behind.</p>
+    <p class="hero-body">Every license renewal is a chance to actually learn something. APEX PDH delivers PDH, CPE, and CLE-eligible AI courses taught by practitioners — not theorists. Real workflows. Real credentials. Real credit.</p>
+    <div class="hero-actions">
+      <a href="#courses" class="btn-primary">Browse Courses</a>
+      <a href="#" class="btn-secondary">Free AI Checklist</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-stat-label">By the numbers</div>
+    <div class="stat-grid">
+      <div class="stat-item">
+        <div class="stat-num">4<span class="stat-unit">M+</span></div>
+        <div class="stat-desc">Licensed professionals<br>in the US</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">40<span class="stat-unit">hr</span></div>
+        <div class="stat-desc">Average CE required<br>per year</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">$0</div>
+        <div class="stat-desc">AI training most<br>received so far</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">Now</div>
+        <div class="stat-desc">When you need to<br>understand this</div>
+      </div>
+    </div>
+    <hr class="hero-rule">
+    <div class="hero-stat-label" style="margin-bottom:16px;">Approved for</div>
+    <div class="profession-tags">
+      <span class="ptag">PE / PDH</span>
+      <span class="ptag">CPA / CPE</span>
+      <span class="ptag">JD / CLE</span>
+      <span class="ptag">MD / CME</span>
+      <span class="ptag">AIA / LU</span>
+      <span class="ptag">Ethics Credit</span>
+    </div>
+  </div>
+</section>
+
+<!-- THE PROBLEM -->
+<section class="problem">
+  <div class="section-kicker" style="color: rgba(201,168,76,0.7);">Why This Exists</div>
+  <h2 class="section-headline">The CE you've been completing<br>is already obsolete.</h2>
+  <p class="section-subhead">The profession-changing technology of your career is happening right now. Your renewal deadline doesn't wait. Neither should your training.</p>
+  <div class="problem-grid">
+    <div class="problem-card">
+      <div class="problem-num">01</div>
+      <h3>AI is already in your practice — ready or not.</h3>
+      <p>Clients are using AI to review your work. Junior staff are using it without disclosure. Courts are addressing it. Your competitors are building workflows around it. The question isn't whether to engage — it's how to do it responsibly.</p>
+    </div>
+    <div class="problem-card">
+      <div class="problem-num">02</div>
+      <h3>Your license is on the line when things go wrong.</h3>
+      <p>AI doesn't stamp drawings. AI doesn't sign returns. AI doesn't carry a bar number. You do. When AI-generated work product fails — and it will, eventually — the liability flows to the licensed professional who relied on it without adequate understanding.</p>
+    </div>
+    <div class="problem-card">
+      <div class="problem-num">03</div>
+      <h3>Nobody else is teaching this at the level you need.</h3>
+      <p>Generic AI courses were built for general audiences. APEX PDH was built for PEs, CPAs, and attorneys who need to understand AI at the level their professional judgment demands — and earn real continuing education credit doing it.</p>
+    </div>
+  </div>
+</section>
+
+<!-- COURSES -->
+<section class="courses" id="courses">
+  <div class="section-kicker">Course Catalog</div>
+  <h2 class="section-headline">Earn credit. Earn your edge.</h2>
+  <p class="section-subhead">Every course earns PDH, CPE, or CLE credit. Every course is built on real practitioner workflows — not recycled theory.</p>
+
+  <table class="course-table">
+    <thead>
+      <tr>
+        <th style="width:45%">Course</th>
+        <th>Credit</th>
+        <th>Eligible For</th>
+        <th style="text-align:right">Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <div class="course-name">AI Fundamentals for Licensed Professionals</div>
+          <div class="course-desc">What LLMs actually are, professional risk framework, responsible use</div>
+        </td>
+        <td><div class="course-pdh">2 PDH</div></td>
+        <td>
+          <div class="course-prof">
+            <span class="prof-badge">PE</span>
+            <span class="prof-badge">CPA</span>
+            <span class="prof-badge">JD</span>
+            <span class="prof-badge">MD</span>
+          </div>
+        </td>
+        <td><div class="course-price">$99</div></td>
+      </tr>
+      <tr>
+        <td>
+          <div class="course-name">Claude Multi-Agent Workflows: Practitioner's Guide</div>
+          <div class="course-desc">Configure agents, delegate tasks, audit trails, real workflow builds</div>
+        </td>
+        <td><div class="course-pdh">3 PDH</div></td>
+        <td>
+          <div class="course-prof">
+            <span class="prof-badge">PE</span>
+            <span class="prof-badge">CPA</span>
+          </div>
+        </td>
+        <td><div class="course-price">$149</div></td>
+      </tr>
+      <tr>
+        <td>
+          <div class="course-name">AI Ethics & Professional Liability <span class="ethics-tag">Ethics</span></div>
+          <div class="course-desc">Confidentiality, negligence exposure, personal AI ethics policy</div>
+        </td>
+        <td><div class="course-pdh">1 PDH</div></td>
+        <td>
+          <div class="course-prof">
+            <span class="prof-badge">PE</span>
+            <span class="prof-badge">CPA</span>
+            <span class="prof-badge">JD</span>
+            <span class="prof-badge">MD</span>
+          </div>
+        </td>
+        <td><div class="course-price">$69</div></td>
+      </tr>
+      <tr>
+        <td>
+          <div class="course-name">Prompt Engineering for Technical Professionals</div>
+          <div class="course-desc">CREO framework, chain-of-thought, structured outputs, prompt libraries</div>
+        </td>
+        <td><div class="course-pdh">2 PDH</div></td>
+        <td>
+          <div class="course-prof">
+            <span class="prof-badge">PE</span>
+            <span class="prof-badge">CPA</span>
+            <span class="prof-badge">JD</span>
+          </div>
+        </td>
+        <td><div class="course-price">$99</div></td>
+      </tr>
+      <tr>
+        <td>
+          <div class="course-name">Regulatory Landscape: AI Law & Licensure Risk</div>
+          <div class="course-desc">Federal/state AI frameworks, profession-specific guidance, monitoring systems</div>
+        </td>
+        <td><div class="course-pdh">1 PDH</div></td>
+        <td>
+          <div class="course-prof">
+            <span class="prof-badge">PE</span>
+            <span class="prof-badge">CPA</span>
+            <span class="prof-badge">JD</span>
+            <span class="prof-badge">MD</span>
+          </div>
+        </td>
+        <td><div class="course-price">$69</div></td>
+      </tr>
+      <tr>
+        <td>
+          <div class="course-name">Building AI-Assisted Workflows in Your Practice</div>
+          <div class="course-desc">Automation mapping, tool selection, ROI calculation, implementation plan</div>
+        </td>
+        <td><div class="course-pdh">3 PDH</div></td>
+        <td>
+          <div class="course-prof">
+            <span class="prof-badge">PE</span>
+            <span class="prof-badge">CPA</span>
+            <span class="prof-badge">JD</span>
+          </div>
+        </td>
+        <td><div class="course-price">$149</div></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div style="text-align:center;">
+    <a href="#" class="btn-primary">View Full Catalog</a>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how">
+  <div class="section-kicker">Process</div>
+  <h2 class="section-headline">From enrollment to certificate<br>in four steps.</h2>
+  <p class="section-subhead">Designed for professionals with packed schedules. Self-paced, asynchronous, and verifiable.</p>
+  <div class="how-steps">
+    <div class="how-step">
+      <div class="step-dot"><div class="step-dot-inner"></div></div>
+      <div class="step-num">Step 01</div>
+      <h3 class="step-title">Choose your course</h3>
+      <p class="step-body">Browse by profession, PDH value, or topic. Filter to courses pre-approved in your state. Add to cart in 90 seconds.</p>
+    </div>
+    <div class="how-step">
+      <div class="step-dot"><div class="step-dot-inner"></div></div>
+      <div class="step-num">Step 02</div>
+      <h3 class="step-title">Complete on your schedule</h3>
+      <p class="step-body">Video modules you can pause and resume. No live requirements. Works on any device. Complete in a single sitting or over weeks.</p>
+    </div>
+    <div class="how-step">
+      <div class="step-dot"><div class="step-dot-inner"></div></div>
+      <div class="step-num">Step 03</div>
+      <h3 class="step-title">Pass the assessment</h3>
+      <p class="step-body">Each course includes a passing-score quiz aligned to state board requirements. Retake until you pass — unlimited attempts included.</p>
+    </div>
+    <div class="how-step">
+      <div class="step-dot"><div class="step-dot-inner"></div></div>
+      <div class="step-num">Step 04</div>
+      <h3 class="step-title">Download your certificate</h3>
+      <p class="step-body">Instantly download a board-compliant completion certificate with provider number, credit hours, and your license information embedded.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WORKSHOP -->
+<section class="workshop" id="workshops">
+  <div class="workshop-grid">
+    <div>
+      <div class="section-kicker" style="color: rgba(255,255,255,0.5);">Live Cohort Experience</div>
+      <h2 class="section-headline">The Claude Power User Intensive</h2>
+      <p style="font-size:16px; line-height:1.75; color:rgba(255,255,255,0.65); margin-bottom:32px;">A half-day live workshop where you build real multi-agent workflows — alongside 14 other licensed professionals — guided by a PE who runs these sessions daily. 6 PDH. Hands-on. Limited enrollment.</p>
+      <a href="#" class="workshop-cta">Reserve Your Seat</a>
+    </div>
+    <div class="workshop-details">
+      <div class="workshop-detail">
+        <div class="wd-label">Format</div>
+        <div>
+          <div class="wd-value">Live via Zoom</div>
+          <div class="wd-sub">Recorded for 30-day replay</div>
+        </div>
+      </div>
+      <div class="workshop-detail">
+        <div class="wd-label">Duration</div>
+        <div>
+          <div class="wd-value">6 Hours</div>
+          <div class="wd-sub">6 PDH / 6 CPE / 6 CLE credit</div>
+        </div>
+      </div>
+      <div class="workshop-detail">
+        <div class="wd-label">Seats</div>
+        <div>
+          <div class="wd-value">15 Maximum</div>
+          <div class="wd-sub">Intentionally small for hands-on coaching</div>
+        </div>
+      </div>
+      <div class="workshop-detail">
+        <div class="wd-label">Price</div>
+        <div>
+          <div class="wd-value">$499</div>
+          <div class="wd-sub">APEX PRO members: $349</div>
+        </div>
+      </div>
+      <div class="workshop-detail">
+        <div class="wd-label">You'll build</div>
+        <div>
+          <div class="wd-value">3 Live Workflows</div>
+          <div class="wd-sub">Document review · Research synthesis · Report automation</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing" id="pricing">
+  <div class="section-kicker">Membership</div>
+  <h2 class="section-headline">One price. Every course.</h2>
+  <p class="section-subhead">Individual courses or full library access — built around how you actually earn CE.</p>
+  <div class="pricing-cards">
+    <div class="pricing-card">
+      <div class="pricing-tier">À La Carte</div>
+      <div class="pricing-price">$69<span style="font-size:24px; color:rgba(244,241,234,0.4)">+</span></div>
+      <div class="pricing-period">per course</div>
+      <ul class="pricing-features">
+        <li class="pricing-feature">Individual course access</li>
+        <li class="pricing-feature">Completion certificate included</li>
+        <li class="pricing-feature">Unlimited replays (90 days)</li>
+        <li class="pricing-feature">Course quiz and assessment</li>
+      </ul>
+      <button class="pricing-btn">Browse Courses</button>
+    </div>
+    <div class="pricing-card featured">
+      <div class="pricing-badge">Most Popular</div>
+      <div class="pricing-tier">APEX PRO</div>
+      <div class="pricing-price">$499</div>
+      <div class="pricing-period">per year · ~$41/month</div>
+      <ul class="pricing-features">
+        <li class="pricing-feature">Full course library (all 10+ courses)</li>
+        <li class="pricing-feature">New course added every month</li>
+        <li class="pricing-feature">30% off all live workshops</li>
+        <li class="pricing-feature">Certificate portfolio & transcript</li>
+        <li class="pricing-feature">Private professional community</li>
+        <li class="pricing-feature">Quarterly State of AI Q&A (live)</li>
+      </ul>
+      <button class="pricing-btn" style="background: var(--ink); color: var(--cream); border-color: var(--ink);">Join APEX PRO</button>
+    </div>
+    <div class="pricing-card">
+      <div class="pricing-tier">Enterprise</div>
+      <div class="pricing-price">$2.5<span style="font-size:28px; color: var(--gold);">K+</span></div>
+      <div class="pricing-period">per year · team licensing</div>
+      <ul class="pricing-features">
+        <li class="pricing-feature">5–200+ seat licensing</li>
+        <li class="pricing-feature">Admin dashboard & reporting</li>
+        <li class="pricing-feature">Custom-branded certificates</li>
+        <li class="pricing-feature">Onboarding session included</li>
+        <li class="pricing-feature">Bulk enrollment management</li>
+      </ul>
+      <button class="pricing-btn">Contact for Pricing</button>
+    </div>
+  </div>
+</section>
+
+<!-- EMAIL CAPTURE -->
+<section class="email-capture">
+  <div class="section-kicker">Free Resource</div>
+  <h2 class="section-headline" style="margin-bottom:16px;">Start with the checklist.</h2>
+  <p class="section-subhead" style="margin: 0 auto 40px; text-align:center;">Download the <em>AI Readiness Checklist for Licensed Professionals</em> — free. No fluff. Just 12 questions that reveal your actual exposure.</p>
+  <div class="email-form">
+    <input type="email" class="email-input" placeholder="your.name@firm.com">
+    <button class="email-submit">Get the Checklist</button>
+  </div>
+  <div class="email-sub">No spam. Unsubscribe anytime. Built for PE, CPA, JD, and MD professionals.</div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">
+    APEX PDH
+    <span>Professional Development Hub</span>
+  </div>
+  <ul class="footer-links">
+    <li><a href="#">Courses</a></li>
+    <li><a href="#">Workshops</a></li>
+    <li><a href="#">Enterprise</a></li>
+    <li><a href="#">About</a></li>
+    <li><a href="#">Terms</a></li>
+    <li><a href="#">Privacy</a></li>
+  </ul>
+  <div class="footer-copy">© 2025 APEX PDH, LLC · All rights reserved</div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BeastTech Logo Exploration — 12 Concepts</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Share+Tech+Mono&family=Rajdhani:wght@300;400;500;600;700&family=Russo+One&family=Audiowide&family=Black+Ops+One&family=Teko:wght@300;400;500;600;700&family=Saira+Stencil+One&family=Major+Mono+Display&family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: #000;
+  color: #ccc;
+  font-family: 'Share Tech Mono', monospace;
+  padding: 40px 20px;
+}
+
+/* Scanlines */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.12) 2px, rgba(0,0,0,0.12) 4px);
+  pointer-events: none;
+  z-index: 10000;
+}
+
+h1 {
+  text-align: center;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 14px;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: #00FF41;
+  text-shadow: 0 0 10px rgba(0,255,65,0.4);
+  margin-bottom: 12px;
+}
+
+.subtitle {
+  text-align: center;
+  font-size: 11px;
+  color: #444;
+  letter-spacing: 0.2em;
+  margin-bottom: 60px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(480px, 1fr));
+  gap: 2px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.card {
+  background: #050508;
+  border: 1px solid #111;
+  padding: 60px 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 320px;
+  position: relative;
+  transition: border-color 0.3s;
+}
+
+.card:hover { border-color: #222; }
+
+.card-num {
+  position: absolute;
+  top: 16px;
+  left: 20px;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: #333;
+}
+
+.card-label {
+  position: absolute;
+  bottom: 16px;
+  left: 20px;
+  right: 20px;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  color: #444;
+  text-align: center;
+}
+
+/* ===========================
+   LOGO 01 — STRANGER THINGS STYLE
+   Tall condensed, heavy glow, red-shifted green
+   =========================== */
+.logo-01 {
+  font-family: 'Teko', sans-serif;
+  font-weight: 300;
+  font-size: 72px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #00FF41;
+  text-shadow:
+    0 0 4px #00FF41,
+    0 0 12px rgba(0,255,65,0.6),
+    0 0 40px rgba(0,255,65,0.3),
+    0 0 80px rgba(0,255,65,0.15);
+  line-height: 0.85;
+  text-align: center;
+  position: relative;
+}
+
+.logo-01 .top {
+  display: block;
+  font-size: 80px;
+  letter-spacing: 0.22em;
+}
+
+.logo-01 .bot {
+  display: block;
+  font-size: 28px;
+  letter-spacing: 0.65em;
+  color: rgba(0,255,65,0.5);
+  text-shadow:
+    0 0 4px rgba(0,255,65,0.4),
+    0 0 15px rgba(0,255,65,0.2);
+  margin-top: 4px;
+}
+
+/* ===========================
+   LOGO 02 — WIREFRAME CAD / BLUEPRINT
+   Thin outline text, construction dots
+   =========================== */
+.logo-02-wrap {
+  position: relative;
+  padding: 20px;
+}
+
+.logo-02 {
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 400;
+  font-size: 42px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: transparent;
+  -webkit-text-stroke: 1px #00FF41;
+  text-shadow: 0 0 20px rgba(0,255,65,0.15);
+  position: relative;
+}
+
+.logo-02 .sub {
+  display: block;
+  font-size: 12px;
+  letter-spacing: 0.5em;
+  -webkit-text-stroke: 0.5px #00FF41;
+  margin-top: 8px;
+  opacity: 0.5;
+}
+
+/* Construction dots */
+.logo-02-wrap::before {
+  content: '';
+  position: absolute;
+  top: 8px; left: 8px; right: 8px; bottom: 8px;
+  border: 1px dashed rgba(0,255,65,0.12);
+}
+
+.logo-02-wrap .dot {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: #00FF41;
+  border-radius: 50%;
+  box-shadow: 0 0 6px rgba(0,255,65,0.6);
+}
+
+.logo-02-wrap .dot:nth-child(1) { top: 6px; left: 6px; }
+.logo-02-wrap .dot:nth-child(2) { top: 6px; right: 6px; }
+.logo-02-wrap .dot:nth-child(3) { bottom: 6px; left: 6px; }
+.logo-02-wrap .dot:nth-child(4) { bottom: 6px; right: 6px; }
+.logo-02-wrap .dot:nth-child(5) { top: 50%; left: 6px; transform: translateY(-50%); }
+.logo-02-wrap .dot:nth-child(6) { top: 50%; right: 6px; transform: translateY(-50%); }
+
+/* ===========================
+   LOGO 03 — MONOCHROME PHOSPHOR BLOCK
+   Heavy weight, extreme glow bleed
+   =========================== */
+.logo-03 {
+  font-family: 'Russo One', sans-serif;
+  font-size: 56px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #00FF41;
+  text-shadow:
+    0 0 2px #fff,
+    0 0 6px #00FF41,
+    0 0 20px #00FF41,
+    0 0 50px rgba(0,255,65,0.5),
+    0 0 100px rgba(0,255,65,0.2);
+  position: relative;
+}
+
+.logo-03 .eng {
+  display: block;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 13px;
+  letter-spacing: 0.45em;
+  color: rgba(0,255,65,0.4);
+  text-shadow: 0 0 10px rgba(0,255,65,0.2);
+  margin-top: 6px;
+  text-align: center;
+}
+
+/* ===========================
+   LOGO 04 — AMBER/ORANGE CRT VARIANT
+   Warm phosphor
+   =========================== */
+.logo-04 {
+  font-family: 'Teko', sans-serif;
+  font-weight: 300;
+  font-size: 68px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: #FFB000;
+  text-shadow:
+    0 0 4px #FFB000,
+    0 0 15px rgba(255,176,0,0.5),
+    0 0 50px rgba(255,176,0,0.25),
+    0 0 100px rgba(255,140,0,0.12);
+  line-height: 0.9;
+}
+
+.logo-04 .sub {
+  display: block;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.6em;
+  color: rgba(255,176,0,0.4);
+  text-shadow: 0 0 8px rgba(255,176,0,0.2);
+  margin-top: 8px;
+  text-align: center;
+}
+
+/* ===========================
+   LOGO 05 — SPLIT / CHROMATIC ABERRATION
+   RGB fringe, glitch feel
+   =========================== */
+.logo-05-wrap {
+  position: relative;
+  display: inline-block;
+}
+
+.logo-05 {
+  font-family: 'Audiowide', sans-serif;
+  font-size: 48px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #e0ffe8;
+  position: relative;
+  z-index: 2;
+}
+
+.logo-05-r, .logo-05-b {
+  font-family: 'Audiowide', sans-serif;
+  font-size: 48px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.logo-05-r {
+  color: rgba(255, 30, 30, 0.5);
+  transform: translate(-2px, 1px);
+}
+
+.logo-05-b {
+  color: rgba(30, 30, 255, 0.5);
+  transform: translate(2px, -1px);
+}
+
+.logo-05-wrap .sub {
+  display: block;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: rgba(0,255,65,0.4);
+  text-align: center;
+  margin-top: 10px;
+  text-shadow: 0 0 6px rgba(0,255,65,0.2);
+  position: relative;
+  z-index: 2;
+}
+
+/* ===========================
+   LOGO 06 — STENCIL / MILITARY INDUSTRIAL
+   Hard edges, stencil font, green phosphor
+   =========================== */
+.logo-06 {
+  font-family: 'Saira Stencil One', sans-serif;
+  font-size: 44px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #00FF41;
+  text-shadow:
+    0 0 3px #00FF41,
+    0 0 10px rgba(0,255,65,0.4),
+    0 0 30px rgba(0,255,65,0.15);
+}
+
+.logo-06 .sub {
+  display: block;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.55em;
+  color: rgba(0,255,65,0.35);
+  margin-top: 8px;
+  text-shadow: 0 0 6px rgba(0,255,65,0.15);
+  text-align: center;
+}
+
+/* ===========================
+   LOGO 07 — PIXEL / RETRO TERMINAL
+   Bitmap feel, 8-bit callback
+   =========================== */
+.logo-07 {
+  font-family: 'Silkscreen', monospace;
+  font-weight: 700;
+  font-size: 36px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #00FF41;
+  text-shadow:
+    0 0 3px #00FF41,
+    0 0 8px rgba(0,255,65,0.5),
+    0 0 25px rgba(0,255,65,0.2);
+  image-rendering: pixelated;
+}
+
+.logo-07 .sub {
+  display: block;
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0.35em;
+  color: rgba(0,255,65,0.4);
+  margin-top: 6px;
+  text-align: center;
+}
+
+/* ===========================
+   LOGO 08 — DUAL-LINE WIREFRAME (CAD)
+   Double-stroked outline, construction grid
+   =========================== */
+.logo-08-wrap {
+  position: relative;
+  padding: 30px 40px;
+}
+
+.logo-08-wrap .grid-lines {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-image:
+    linear-gradient(rgba(0,255,65,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,255,65,0.04) 1px, transparent 1px);
+  background-size: 16px 16px;
+  pointer-events: none;
+}
+
+.logo-08-wrap .crosshair {
+  position: absolute;
+  width: 12px; height: 12px;
+  border: 1px solid rgba(0,255,65,0.25);
+  border-radius: 50%;
+}
+
+.logo-08-wrap .crosshair::before,
+.logo-08-wrap .crosshair::after {
+  content: '';
+  position: absolute;
+  background: rgba(0,255,65,0.2);
+}
+
+.logo-08-wrap .crosshair::before {
+  width: 1px; height: 20px;
+  top: -4px; left: 50%;
+  transform: translateX(-50%);
+}
+
+.logo-08-wrap .crosshair::after {
+  width: 20px; height: 1px;
+  top: 50%; left: -4px;
+  transform: translateY(-50%);
+}
+
+.logo-08-wrap .crosshair:nth-of-type(1) { top: -6px; left: -6px; }
+.logo-08-wrap .crosshair:nth-of-type(2) { top: -6px; right: -6px; }
+.logo-08-wrap .crosshair:nth-of-type(3) { bottom: -6px; left: -6px; }
+.logo-08-wrap .crosshair:nth-of-type(4) { bottom: -6px; right: -6px; }
+
+.logo-08 {
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 700;
+  font-size: 46px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: transparent;
+  -webkit-text-stroke: 1.5px #00FF41;
+  text-shadow: 0 0 15px rgba(0,255,65,0.2);
+  position: relative;
+  filter: drop-shadow(0 0 3px rgba(0,255,65,0.4));
+}
+
+.logo-08-shadow {
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 700;
+  font-size: 46px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: transparent;
+  -webkit-text-stroke: 0.5px rgba(0,255,65,0.15);
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  z-index: -1;
+}
+
+.logo-08-wrap .dim-label {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 9px;
+  color: rgba(0,255,65,0.25);
+  letter-spacing: 0.15em;
+  position: absolute;
+  bottom: 6px;
+  right: 10px;
+}
+
+.logo-08-wrap .dim-top {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 9px;
+  color: rgba(0,255,65,0.2);
+  letter-spacing: 0.1em;
+  position: absolute;
+  top: 6px;
+  left: 10px;
+}
+
+.logo-08 .sub {
+  display: block;
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.45em;
+  -webkit-text-stroke: 0.5px rgba(0,255,65,0.6);
+  margin-top: 6px;
+  text-align: center;
+}
+
+/* ===========================
+   LOGO 09 — CYAN / ICE VARIANT
+   Cool tone, sharp glow
+   =========================== */
+.logo-09 {
+  font-family: 'Teko', sans-serif;
+  font-weight: 300;
+  font-size: 74px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #00FFFF;
+  text-shadow:
+    0 0 4px #00FFFF,
+    0 0 12px rgba(0,255,255,0.5),
+    0 0 40px rgba(0,255,255,0.25),
+    0 0 80px rgba(0,255,255,0.1);
+  line-height: 0.85;
+}
+
+.logo-09 .sub {
+  display: block;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.55em;
+  color: rgba(0,255,255,0.35);
+  text-shadow: 0 0 8px rgba(0,255,255,0.15);
+  margin-top: 8px;
+  text-align: center;
+}
+
+/* ===========================
+   LOGO 10 — DUAL GREEN + WHITE SPLIT
+   Two-tone, clean, high contrast
+   =========================== */
+.logo-10 {
+  text-align: center;
+  line-height: 1;
+}
+
+.logo-10 .beast {
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 900;
+  font-size: 52px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #fff;
+  text-shadow:
+    0 0 4px rgba(255,255,255,0.6),
+    0 0 20px rgba(255,255,255,0.15);
+  display: block;
+}
+
+.logo-10 .tech {
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 900;
+  font-size: 52px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #00FF41;
+  text-shadow:
+    0 0 4px #00FF41,
+    0 0 15px rgba(0,255,65,0.5),
+    0 0 40px rgba(0,255,65,0.2);
+  display: block;
+  margin-top: -6px;
+}
+
+.logo-10 .sub {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.5em;
+  color: rgba(0,255,65,0.35);
+  margin-top: 10px;
+  display: block;
+}
+
+/* ===========================
+   LOGO 11 — STRANGER THINGS DIRECT HOMAGE
+   Tall, thin, heavy inner glow, stacked
+   =========================== */
+.logo-11 {
+  text-align: center;
+  position: relative;
+}
+
+.logo-11 .main {
+  font-family: 'Teko', sans-serif;
+  font-weight: 300;
+  font-size: 92px;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: #00FF41;
+  text-shadow:
+    0 0 2px #aaffaa,
+    0 0 6px #00FF41,
+    0 0 20px #00FF41,
+    0 0 60px rgba(0,255,65,0.4),
+    0 0 120px rgba(0,255,65,0.15);
+  line-height: 0.78;
+  display: block;
+}
+
+.logo-11 .line {
+  display: block;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(0,255,65,0.5), transparent);
+  margin: 6px 0;
+  box-shadow: 0 0 6px rgba(0,255,65,0.3);
+}
+
+.logo-11 .sub {
+  font-family: 'Teko', sans-serif;
+  font-weight: 300;
+  font-size: 32px;
+  letter-spacing: 0.85em;
+  text-transform: uppercase;
+  color: rgba(0,255,65,0.5);
+  text-shadow:
+    0 0 4px rgba(0,255,65,0.3),
+    0 0 15px rgba(0,255,65,0.15);
+  display: block;
+  padding-left: 0.85em;
+}
+
+/* ===========================
+   LOGO 12 — GREEN + RED DANGER VARIANT
+   Industrial warning, high tension
+   =========================== */
+.logo-12 {
+  text-align: center;
+}
+
+.logo-12 .main {
+  font-family: 'Russo One', sans-serif;
+  font-size: 50px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #00FF41;
+  text-shadow:
+    0 0 3px #00FF41,
+    0 0 12px rgba(0,255,65,0.4),
+    0 0 35px rgba(0,255,65,0.15);
+  display: block;
+}
+
+.logo-12 .divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 8px 0;
+  justify-content: center;
+}
+
+.logo-12 .divider span {
+  height: 1px;
+  flex: 1;
+  max-width: 100px;
+  background: rgba(255,40,40,0.3);
+  box-shadow: 0 0 6px rgba(255,40,40,0.2);
+}
+
+.logo-12 .divider .diamond {
+  width: 6px;
+  height: 6px;
+  background: #ff2828;
+  transform: rotate(45deg);
+  box-shadow: 0 0 8px rgba(255,40,40,0.5);
+  flex-shrink: 0;
+}
+
+.logo-12 .sub {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: rgba(255,40,40,0.45);
+  text-shadow: 0 0 8px rgba(255,40,40,0.15);
+  display: block;
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 520px) {
+  .grid { grid-template-columns: 1fr; }
+  .logo-01 .top { font-size: 48px; }
+  .logo-02 { font-size: 28px; }
+  .logo-03 { font-size: 36px; }
+  .logo-04 { font-size: 44px; }
+  .logo-05, .logo-05-r, .logo-05-b { font-size: 30px; }
+  .logo-06 { font-size: 28px; }
+  .logo-07 { font-size: 24px; }
+  .logo-08, .logo-08-shadow { font-size: 28px; }
+  .logo-09 { font-size: 48px; }
+  .logo-10 .beast, .logo-10 .tech { font-size: 34px; }
+  .logo-11 .main { font-size: 56px; }
+  .logo-12 .main { font-size: 32px; }
+  .card { padding: 48px 20px; min-height: 260px; }
+}
+</style>
+</head>
+<body>
+
+<h1>BeastTech — Logo Exploration</h1>
+<p class="subtitle">12 CONCEPTS // CRT + CAD + WIREFRAME // 2026-04-01</p>
+
+<div class="grid">
+
+  <!-- 01: STRANGER THINGS HOMAGE — CONDENSED -->
+  <div class="card">
+    <span class="card-num">01</span>
+    <div class="logo-01">
+      <span class="top">BeastTech</span>
+      <span class="bot">Engineering</span>
+    </div>
+    <span class="card-label">Stranger Things condensed — heavy phosphor glow — green</span>
+  </div>
+
+  <!-- 02: WIREFRAME CAD OUTLINE -->
+  <div class="card">
+    <span class="card-num">02</span>
+    <div class="logo-02-wrap">
+      <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+      <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+      <div class="logo-02">
+        BeastTech
+        <span class="sub">Engineering</span>
+      </div>
+    </div>
+    <span class="card-label">CAD wireframe outline — construction dots — dashed border</span>
+  </div>
+
+  <!-- 03: PHOSPHOR BLOCK -->
+  <div class="card">
+    <span class="card-num">03</span>
+    <div class="logo-03">
+      BeastTech
+      <span class="eng">Engineering</span>
+    </div>
+    <span class="card-label">Heavy phosphor block — extreme CRT bloom — white core bleed</span>
+  </div>
+
+  <!-- 04: AMBER CRT -->
+  <div class="card">
+    <span class="card-num">04</span>
+    <div class="logo-04">
+      BeastTech
+      <span class="sub">Engineering</span>
+    </div>
+    <span class="card-label">Amber CRT phosphor — warm vintage terminal — 80s warmth</span>
+  </div>
+
+  <!-- 05: CHROMATIC ABERRATION -->
+  <div class="card">
+    <span class="card-num">05</span>
+    <div class="logo-05-wrap">
+      <span class="logo-05-r">BeastTech</span>
+      <span class="logo-05-b">BeastTech</span>
+      <span class="logo-05">BeastTech</span>
+      <span class="sub">Engineering</span>
+    </div>
+    <span class="card-label">Chromatic aberration — RGB fringe — CRT misalignment glitch</span>
+  </div>
+
+  <!-- 06: STENCIL MILITARY -->
+  <div class="card">
+    <span class="card-num">06</span>
+    <div class="logo-06">
+      BeastTech
+      <span class="sub">Engineering</span>
+    </div>
+    <span class="card-label">Military stencil — industrial classification — phosphor green</span>
+  </div>
+
+  <!-- 07: PIXEL RETRO -->
+  <div class="card">
+    <span class="card-num">07</span>
+    <div class="logo-07">
+      BeastTech
+      <span class="sub">Engineering</span>
+    </div>
+    <span class="card-label">8-bit pixel terminal — retro bitmap — early DOS feel</span>
+  </div>
+
+  <!-- 08: DUAL-LINE CAD WIREFRAME -->
+  <div class="card">
+    <span class="card-num">08</span>
+    <div class="logo-08-wrap">
+      <div class="grid-lines"></div>
+      <div class="crosshair"></div>
+      <div class="crosshair"></div>
+      <div class="crosshair"></div>
+      <div class="crosshair"></div>
+      <span class="dim-top">REV.A // 2026</span>
+      <div class="logo-08-shadow">BeastTech</div>
+      <div class="logo-08">
+        BeastTech
+        <span class="sub">Engineering</span>
+      </div>
+      <span class="dim-label">SCALE: 1:1 // DWG: BTE-001</span>
+    </div>
+    <span class="card-label">Full CAD treatment — crosshairs, grid, dual-line, dimension labels</span>
+  </div>
+
+  <!-- 09: CYAN ICE -->
+  <div class="card">
+    <span class="card-num">09</span>
+    <div class="logo-09">
+      BeastTech
+      <span class="sub">Engineering</span>
+    </div>
+    <span class="card-label">Cyan phosphor variant — cool ice tone — same Stranger Things form</span>
+  </div>
+
+  <!-- 10: DUAL GREEN + WHITE -->
+  <div class="card">
+    <span class="card-num">10</span>
+    <div class="logo-10">
+      <span class="beast">Beast</span>
+      <span class="tech">Tech</span>
+      <span class="sub">Engineering</span>
+    </div>
+    <span class="card-label">Two-tone split — white BEAST / green TECH — high contrast</span>
+  </div>
+
+  <!-- 11: FULL STRANGER THINGS — TALL + LINE + SUB -->
+  <div class="card">
+    <span class="card-num">11</span>
+    <div class="logo-11">
+      <span class="main">BeastTech</span>
+      <span class="line"></span>
+      <span class="sub">Engineering</span>
+    </div>
+    <span class="card-label">Full Stranger Things homage — tall thin glowing letters — divider line — expanded sub</span>
+  </div>
+
+  <!-- 12: GREEN + RED INDUSTRIAL WARNING -->
+  <div class="card">
+    <span class="card-num">12</span>
+    <div class="logo-12">
+      <span class="main">BeastTech</span>
+      <div class="divider">
+        <span></span>
+        <div class="diamond"></div>
+        <span></span>
+      </div>
+      <span class="sub">Engineering</span>
+    </div>
+    <span class="card-label">Industrial warning — green/red tension — diamond marker — danger aesthetic</span>
+  </div>
+
+</div>
+
+</body>
+</html>
