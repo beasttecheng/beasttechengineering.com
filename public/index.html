@@ -113,20 +113,20 @@ img, svg { display: block; max-width: 100%; }
   pointer-events: none;
   z-index: 9999;
   transform: translate(-50%, -50%);
-  transition: width 0.2s, height 0.2s, background 0.2s, opacity 0.2s;
+  transition: width 0.15s, height 0.15s, opacity 0.15s;
   mix-blend-mode: difference;
 }
 
 .cursor-ring {
   position: fixed;
   top: 0; left: 0;
-  width: 40px; height: 40px;
-  border: 1.5px solid rgba(0, 232, 90, 0.4);
+  width: 36px; height: 36px;
+  border: 1.5px solid rgba(0, 232, 90, 0.35);
   border-radius: 50%;
   pointer-events: none;
   z-index: 9998;
   transform: translate(-50%, -50%);
-  transition: width 0.3s ease, height 0.3s ease, border-color 0.3s, background 0.3s;
+  transition: width 0.18s ease-out, height 0.18s ease-out, border-color 0.18s, background 0.18s, opacity 0.18s;
 }
 
 body.cursor-hover .cursor-dot {
@@ -134,13 +134,13 @@ body.cursor-hover .cursor-dot {
 }
 
 body.cursor-hover .cursor-ring {
-  width: 64px; height: 64px;
-  background: rgba(0, 232, 90, 0.08);
-  border-color: rgba(0, 232, 90, 0.6);
+  width: 56px; height: 56px;
+  background: rgba(0, 232, 90, 0.06);
+  border-color: rgba(0, 232, 90, 0.5);
 }
 
 body.cursor-text .cursor-ring {
-  width: 4px; height: 32px;
+  width: 3px; height: 28px;
   border-radius: 2px;
   border-color: var(--green);
   background: var(--green);
@@ -1279,8 +1279,8 @@ footer {
       <div class="hero-divider" id="heroDivider"></div>
       <span class="line"><span class="line-inner word-eng">ENGINEERING</span></span>
     </div>
-    <p class="hero-sub" id="heroSub">A registered engineering firm that builds AI-driven operational systems, sources industrial technology across borders, and partners with growth-stage companies as embedded technical leadership.</p>
-    <div class="hero-credential" id="heroCred">Registered Engineering Firm — Texas Board of Professional Engineers</div>
+    <p class="hero-sub" id="heroSub">A mechanical engineer with a decade in nuclear and industrial manufacturing used AI to build production systems that replaced entire software platforms — with zero coding background. That capability is now a registered engineering firm.</p>
+    <div class="hero-credential" id="heroCred">Licensed P.E. — Texas Board of Professional Engineers</div>
     <a href="#assessment" class="hero-cta" id="heroCta" data-magnetic>Request capability assessment <span class="cta-arrow">&rarr;</span></a>
     <div class="hero-scroll-hint" id="heroScroll">
       <span>Scroll</span>
@@ -1292,22 +1292,22 @@ footer {
 <!-- MARQUEE -->
 <div class="marquee-section">
   <div class="marquee-track" id="marqueeTrack">
-    <div class="marquee-item">Multi-Agent Systems</div>
-    <div class="marquee-item">Industrial Sourcing</div>
+    <div class="marquee-item">Multi-Agent Orchestration</div>
+    <div class="marquee-item">Nuclear Engineering</div>
+    <div class="marquee-item">Heat Exchangers</div>
+    <div class="marquee-item">AI-Native Operations</div>
+    <div class="marquee-item">Global Sourcing</div>
     <div class="marquee-item">Equity Partnerships</div>
-    <div class="marquee-item">AI Automation</div>
-    <div class="marquee-item">Operational Intelligence</div>
-    <div class="marquee-item">Cross-Border Distribution</div>
-    <div class="marquee-item">Professional Development</div>
-    <div class="marquee-item">Production AI Systems</div>
-    <div class="marquee-item">Multi-Agent Systems</div>
-    <div class="marquee-item">Industrial Sourcing</div>
+    <div class="marquee-item">Hydraulic Systems</div>
+    <div class="marquee-item">Production AI</div>
+    <div class="marquee-item">Multi-Agent Orchestration</div>
+    <div class="marquee-item">Nuclear Engineering</div>
+    <div class="marquee-item">Heat Exchangers</div>
+    <div class="marquee-item">AI-Native Operations</div>
+    <div class="marquee-item">Global Sourcing</div>
     <div class="marquee-item">Equity Partnerships</div>
-    <div class="marquee-item">AI Automation</div>
-    <div class="marquee-item">Operational Intelligence</div>
-    <div class="marquee-item">Cross-Border Distribution</div>
-    <div class="marquee-item">Professional Development</div>
-    <div class="marquee-item">Production AI Systems</div>
+    <div class="marquee-item">Hydraulic Systems</div>
+    <div class="marquee-item">Production AI</div>
   </div>
 </div>
 
@@ -1317,19 +1317,19 @@ footer {
     <div class="stats-grid fade-up">
       <div class="stat-card">
         <div class="stat-number"><span class="counter" data-target="10">0</span><span class="stat-suffix">+</span></div>
-        <div class="stat-label">Years Engineering</div>
+        <div class="stat-label">Years in Nuclear &amp; Industrial</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number"><span class="counter" data-target="15">0</span><span class="stat-suffix">+</span></div>
+        <div class="stat-label">AI Agents in Production</div>
       </div>
       <div class="stat-card">
         <div class="stat-number"><span class="counter" data-target="4">0</span></div>
-        <div class="stat-label">Divisions</div>
+        <div class="stat-label">Continents Served</div>
       </div>
       <div class="stat-card">
-        <div class="stat-number"><span class="counter" data-target="6">0</span><span class="stat-suffix">+</span></div>
-        <div class="stat-label">AI Agents Deployed</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-number"><span class="counter" data-target="1">0</span></div>
-        <div class="stat-label">Licensed P.E.</div>
+        <div class="stat-number"><span class="counter" data-target="0">0</span></div>
+        <div class="stat-label">Lines of Code Written</div>
       </div>
     </div>
   </div>
@@ -1351,9 +1351,9 @@ footer {
         </div>
         <div class="division-card-body">
           <h3>Intelligent Systems That Replace Coordination Overhead</h3>
-          <p>We design and deploy multi-agent architectures, automation pipelines, and intelligence layers that eliminate the management tax between decisions and execution. Not chatbots — production systems that run operations.</p>
+          <p>We've built a 15-agent production system that replaced ERP, CRM, and MRP at an industrial manufacturer — with zero SaaS licensing costs. Not chatbots. Not prototypes. Production systems that run real operations, today.</p>
           <ul>
-            <li>Multi-agent orchestration systems</li>
+            <li>Multi-agent orchestration replacing entire software stacks</li>
             <li>Automated decision routing &amp; workflows</li>
             <li>Custom internal platforms — zero SaaS dependency</li>
             <li>Operational intelligence replacing headcount</li>
@@ -1368,11 +1368,11 @@ footer {
         </div>
         <div class="division-card-body">
           <h3>Industrial Technology Without Borders</h3>
-          <p>Proven industrial systems trapped in one geography while other markets overpay for inferior alternatives. We identify, source, and distribute specialty engineering technologies — US to EU, Australia, APAC, and beyond.</p>
+          <p>A decade of sourcing and distributing specialty industrial technology across four continents — North America, Europe, Asia Pacific, and the Middle East. We connect proven systems with the markets that need them.</p>
           <ul>
-            <li>Cross-border technology distribution</li>
+            <li>Cross-border technology distribution (US, EU, Korea, Japan, Australia)</li>
             <li>OEM partnership structuring</li>
-            <li>Technical evaluation &amp; qualification</li>
+            <li>Technical evaluation &amp; nuclear-grade qualification</li>
             <li>Local support network deployment</li>
           </ul>
         </div>
@@ -1385,9 +1385,9 @@ footer {
         </div>
         <div class="division-card-body">
           <h3>Embedded Technical Leadership, Aligned on Growth</h3>
-          <p>We place expert engineering leadership inside companies — not as consultants billing hours, but as partners with equity positions tranched on growth milestones. When the company wins, we win. That's the alignment that produces real results.</p>
+          <p>Currently operating as embedded engineering leadership inside an industrial manufacturer — equity-aligned, milestone-tranched, building from the inside. Not a consultant. A partner with skin in the game and a P.E. stamp.</p>
           <ul>
-            <li>Equity-structured growth engagements</li>
+            <li>Active equity-aligned partnership in a $1M+ revenue industrial firm</li>
             <li>Milestone-based compensation alignment</li>
             <li>Embedded operational leadership</li>
             <li>Also available as purchased services</li>
@@ -1465,7 +1465,7 @@ footer {
       <div class="engage-text fade-up">
         <h3>Multiple Ways to Work Together</h3>
         <p>Not every engagement requires equity. Not every company needs AI. BeastTech structures each engagement around what the problem actually requires — from purchased project work to long-term growth partnerships.</p>
-        <p>We bring engineering rigor from a decade in industrial manufacturing — heat exchangers, nuclear systems, petrochemical infrastructure, international OEM operations — combined with production-grade AI system design.</p>
+        <p>We bring engineering rigor from a decade in heat exchangers, nuclear steam generators, petrochemical infrastructure, high-pressure hydraulic systems, and international OEM operations — combined with production-grade AI system design built by a P.E. who replaced entire software platforms without writing code.</p>
       </div>
       <div class="engage-models stagger-children">
         <div class="engage-model">
@@ -1499,7 +1499,7 @@ footer {
       </div>
     </div>
     <div class="founder-bar fade-up">
-      <p><strong>BeastTech Engineering</strong> was founded by a mechanical engineer with a decade in industrial manufacturing who used AI to build production systems that replaced entire software platforms — with zero coding background. That capability is now a firm.</p>
+      <p><strong>BeastTech Engineering</strong> was founded by a licensed P.E. with a decade in nuclear and industrial manufacturing — heat exchangers, hydraulic systems, international OEM operations — who built a 15-agent AI system that replaced ERP, CRM, and MRP at a real manufacturer. Zero coding background. Zero SaaS licenses. That capability is now a firm.</p>
       <div>
         <div class="founder-name">Ben East, P.E.</div>
         <div class="founder-title">Founder &amp; Principal Engineer</div>
@@ -1758,31 +1758,23 @@ function animateHero() {
 
   const dot = document.getElementById('cursorDot');
   const ring = document.getElementById('cursorRing');
-  let mouseX = 0, mouseY = 0;
-  let ringX = 0, ringY = 0;
 
   document.addEventListener('mousemove', e => {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
-    dot.style.left = mouseX + 'px';
-    dot.style.top = mouseY + 'px';
+    const x = e.clientX;
+    const y = e.clientY;
+    // Both track mouse instantly — zero lag
+    dot.style.left = x + 'px';
+    dot.style.top = y + 'px';
+    ring.style.left = x + 'px';
+    ring.style.top = y + 'px';
 
     // Move hero glow with cursor
     const glow = document.getElementById('heroGlowCursor');
     if (glow) {
-      glow.style.left = mouseX + 'px';
-      glow.style.top = mouseY + 'px';
+      glow.style.left = x + 'px';
+      glow.style.top = y + 'px';
     }
   });
-
-  function animateRing() {
-    ringX += (mouseX - ringX) * 0.22;
-    ringY += (mouseY - ringY) * 0.22;
-    ring.style.left = ringX + 'px';
-    ring.style.top = ringY + 'px';
-    requestAnimationFrame(animateRing);
-  }
-  animateRing();
 
   // Hover states
   const hoverTargets = 'a, button, [data-magnetic], .division-card, .problem-block, .engage-model';
