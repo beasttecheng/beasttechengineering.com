@@ -1206,8 +1206,21 @@ footer {
   .radio-opt:last-child label.radio-label { border-radius: 0 0 6px 6px; }
   .radio-opt:not(:first-child) label.radio-label { border-left: 1px solid var(--border); border-top: none; }
   body { cursor: auto; }
-  .cursor-dot, .cursor-ring { display: none; }
+  .cursor-dot, .cursor-ring { display: none !important; }
   a, button, input, select, textarea, .division-card, .problem-block, .engage-model { cursor: auto; }
+}
+
+/* Touch devices (iPad, phones) */
+@media (hover: none) and (pointer: coarse) {
+  body { cursor: auto; }
+  .cursor-dot, .cursor-ring { display: none !important; }
+  a, button, input, select, textarea, .division-card, .problem-block, .engage-model { cursor: auto; }
+  .division-card:hover { transform: none; box-shadow: 0 4px 20px rgba(0,0,0,0.3); }
+  .problem-block:hover { transform: none; }
+  .engage-model:hover { transform: none; }
+  .hero-cta:hover { transform: none; box-shadow: none; }
+  .form-submit:hover { transform: none; box-shadow: none; }
+  .hero-glow-3 { display: none; }
 }
 
 @media (max-width: 600px) {
@@ -1740,7 +1753,8 @@ function animateHero() {
 // CUSTOM CURSOR
 // ============================================================
 (function() {
-  if (window.matchMedia('(max-width: 900px)').matches) return;
+  const isTouch = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
+  if (isTouch || window.matchMedia('(max-width: 900px)').matches) return;
 
   const dot = document.getElementById('cursorDot');
   const ring = document.getElementById('cursorRing');
@@ -1762,8 +1776,8 @@ function animateHero() {
   });
 
   function animateRing() {
-    ringX += (mouseX - ringX) * 0.12;
-    ringY += (mouseY - ringY) * 0.12;
+    ringX += (mouseX - ringX) * 0.22;
+    ringY += (mouseY - ringY) * 0.22;
     ring.style.left = ringX + 'px';
     ring.style.top = ringY + 'px';
     requestAnimationFrame(animateRing);
